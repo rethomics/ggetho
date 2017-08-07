@@ -148,7 +148,9 @@ When studing biological rhythms, we often want to add to our plots information a
 pl1 + stat_pop_etho() + stat_ld_annotations()
 ```
 
-![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-8-1.png) Note that, LD annotations will also work on tile plot. the function comes with extra arguments. For instance, here, we replace the white by grey, and use a period of 23h instead of 24h:
+![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-8-1.png)
+
+Note that, LD annotations will also work on tile plot. the function comes with extra arguments. For instance, here, we replace the white by grey, and use a period of 23h instead of 24h:
 
 ``` r
 pl1 + stat_pop_etho() + 

@@ -108,9 +108,11 @@ When studing biological rhythms, we often want to add to our plots information a
 ```{r, plot=TRUE}
 pl1 + stat_pop_etho() + stat_ld_annotations()
 ```
+
 Note that, LD annotations will also work on tile plot.
 the function comes with extra arguments. 
 For instance, here, we replace the white by grey, and use a period of 23h instead of 24h:
+
 ```{r, plot=TRUE}
 pl1 + stat_pop_etho() + 
   stat_ld_annotations(ld_colours = c("grey","black"), period = hours(23))
