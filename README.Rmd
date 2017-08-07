@@ -39,7 +39,7 @@ install_github("rethomics/ggetho")
 
 ## First steps
 
-Lets simmulate toy data (we call it `dt`) using `behavr` package. 
+Let's simulate toy data (we call it `dt`) using `behavr` package. 
 We "make"" 20 animals with two conditions and four age groups.
 ```{r}
 library(behavr)
@@ -52,7 +52,7 @@ print(query)
 dt <- toy_activity_data(query,seed=3)
 dt
 ```
-As you can see, in addition to the `id` clumun,
+As you can see, in addition to the `id` column,
 which uniquely identify an animal, our data has three variables: 
 
 * `t` -- the time
@@ -60,16 +60,16 @@ which uniquely identify an animal, our data has three variables:
 * `asleep` -- whether the animal is asleep
 
 
-Let our variable of interest be `moving` and we want moving (as a proportion) on the y axis (and implicitly, `t` is on the x axis).
+Let our variable of interest be `moving` and we want `moving` (as a proportion) on the y axis (and implicitly, `t` is on the x axis).
 We also want different colours (`colour`) for each condition,
-then we would start by "translating" this verbal request in a object like this:
+then we would start by "translating" this verbal request to an object like this:
 ```{r, plot=TRUE}
 pl1 <- ggetho(dt, aes(y=moving, colour=condition))
 pl1
 ```
 
 Again, **this plot is empty** because no layer was added yet.
-Though it already know the names and scale of the axis.
+Though it already knows the names and scale of the axis.
 
 Sometimes, the variable of interest will not be on the y axis, instead, we want a colour intensity (z axis) to represent it in some sort of **tile plot**.
 *When unspecified, the y axis is discrete, and implies one row per individual animals.*

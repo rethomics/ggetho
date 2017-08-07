@@ -29,7 +29,7 @@ install_github("rethomics/ggetho")
 First steps
 -----------
 
-Lets simmulate toy data (we call it `dt`) using `behavr` package. We "make"" 20 animals with two conditions and four age groups.
+Let's simulate toy data (we call it `dt`) using `behavr` package. We "make"" 20 animals with two conditions and four age groups.
 
 ``` r
 library(behavr)
@@ -86,13 +86,13 @@ dt
     ## 864019: 20|toy_experiment 431990  FALSE  FALSE
     ## 864020: 20|toy_experiment 432000  FALSE  FALSE
 
-As you can see, in addition to the `id` clumun, which uniquely identify an animal, our data has three variables:
+As you can see, in addition to the `id` column, which uniquely identify an animal, our data has three variables:
 
 -   `t` -- the time
 -   `moving` -- whether the animal is moving at that time
 -   `asleep` -- whether the animal is asleep
 
-Let our variable of interest be `moving` and we want moving (as a proportion) on the y axis (and implicitly, `t` is on the x axis). We also want different colours (`colour`) for each condition, then we would start by "translating" this verbal request in a object like this:
+Let our variable of interest be `moving` and we want `moving` (as a proportion) on the y axis (and implicitly, `t` is on the x axis). We also want different colours (`colour`) for each condition, then we would start by "translating" this verbal request to an object like this:
 
 ``` r
 pl1 <- ggetho(dt, aes(y=moving, colour=condition))
@@ -101,7 +101,7 @@ pl1
 
 ![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png)
 
-Again, **this plot is empty** because no layer was added yet. Though it already know the names and scale of the axis.
+Again, **this plot is empty** because no layer was added yet. Though it already knows the names and scale of the axis.
 
 Sometimes, the variable of interest will not be on the y axis, instead, we want a colour intensity (z axis) to represent it in some sort of **tile plot**. *When unspecified, the y axis is discrete, and implies one row per individual animals.*
 
