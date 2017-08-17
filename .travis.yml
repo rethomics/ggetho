@@ -8,12 +8,18 @@ r:
   - release
   - devel
 
-r_packages: covr
-
-r_github_packages: rethomics/behavr
+r_packages:
+  - covr
+  - knitr
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+script:
+    - R CMD build .
+    - R CMD check *tar.gz
+    - make README.md
+
 
 notifications:
   email:
