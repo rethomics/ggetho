@@ -18,12 +18,12 @@ ggetho(data, mapping, summary_FUN = mean, summary_time_window = mins(30),
 
 \item{time_wrap}{time (in seconds) used to wrap the data (see details)}
 
-\item{time_offset}{Time offset (i.e. phase, in seconds) when using \code{time_wrap}}
+\item{time_offset}{time offset (i.e. phase, in seconds) when using \code{time_wrap}}
 
 \item{...}{additional arguments to be passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 }
 \value{
-A initial plot object that can be further edited.
+an initial plot object that can be further edited.
 }
 \description{
 This function summarises a variable of interest (y or z axis)
@@ -33,12 +33,12 @@ in order to subsequently represent it over time (x axis)
 \details{
 \code{time_wrap} is typically used to express time relatively to the start of the the day.
 In other words, it can help be used to pull all days together in one representative day.
-In this case, \code{time_wrap=hours(24)}.
+In this case, \code{time_wrap = hours(24)}.
 Instead of representing data from the start of the day, it can be done from any offset, using \code{time_offset}.
-For instance,  \code{time_offset= hours(12)} puts the circadian reference (ZT0) in the middle of the plot.
+For instance,  \code{time_offset = hours(12)} puts the circadian reference (ZT0) in the middle of the plot.
 }
 \examples{
-# we start by making a to dataset with 20 animals
+# We start by making a to dataset with 20 animals
 library(behavr)
 query <- data.frame(experiment_id="toy_experiment",
                    region_id=1:20,

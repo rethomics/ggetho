@@ -4,7 +4,6 @@
 #' This function shows the temporal trend (time on the x axis) of a varible of interest as colour instensity (z axis).
 #' The y axis is a discrete variable such as a treatment or the id of animals.
 #'
-#'
 #' @family layers
 #' @inheritParams ggplot2::stat_summary_2d
 #' @inheritParams stat_pop_etho

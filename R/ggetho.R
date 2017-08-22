@@ -13,16 +13,16 @@ NULL
 #' @param summary_FUN method (function) used to summarise `variable` over time (typically, the mean)
 #' @param summary_time_window width (in seconds) of the time window to compute a summary on
 #' @param time_wrap time (in seconds) used to wrap the data (see details)
-#' @param time_offset Time offset (i.e. phase, in seconds) when using `time_wrap`
+#' @param time_offset time offset (i.e. phase, in seconds) when using `time_wrap`
 #' @param ... additional arguments to be passed to [ggplot2::ggplot()]
 #' @details `time_wrap` is typically used to express time relatively to the start of the the day.
 #' In other words, it can help be used to pull all days together in one representative day.
-#' In this case, `time_wrap=hours(24)`.
+#' In this case, `time_wrap = hours(24)`.
 #' Instead of representing data from the start of the day, it can be done from any offset, using `time_offset`.
-#' For instance,  `time_offset= hours(12)` puts the circadian reference (ZT0) in the middle of the plot.
-#' @return A initial plot object that can be further edited.
+#' For instance,  `time_offset = hours(12)` puts the circadian reference (ZT0) in the middle of the plot.
+#' @return an initial plot object that can be further edited.
 #' @examples
-#' # we start by making a to dataset with 20 animals
+#' # We start by making a to dataset with 20 animals
 #' library(behavr)
 #' query <- data.frame(experiment_id="toy_experiment",
 #'                    region_id=1:20,

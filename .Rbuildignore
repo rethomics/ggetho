@@ -9,4 +9,4 @@
 ^revdep$
 ^.*\.tar\.gz$
 ^.*\.pdf$
-^\./README_files/$
+^README_files/$
