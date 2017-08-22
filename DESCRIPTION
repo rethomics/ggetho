@@ -6,9 +6,10 @@ Authors@R: c(
     person("Quentin", "Geissmann", role = c("aut", "cre"), email = "qgeissmann@gmail.com")
     )
 Description: Uses ggplot to represent animal behaviour data, generally recorded over multiple days.
-Depends: ggplot2
+Depends: 
+    ggplot2,
+    behavr
 Imports:
-    behavr,
     data.table,
     hms
 Suggests: testthat

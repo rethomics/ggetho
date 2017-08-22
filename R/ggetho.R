@@ -1,4 +1,6 @@
 #' @importFrom data.table ":="
+#' @import ggplot2
+#' @import  behavr
 NULL
 #' Prepare a ggplot object to represent behavioural data
 #'
@@ -86,19 +88,6 @@ ggetho <- function(data,
     stop("Either `y` or `z` should be provided as variable of interest")
 
 
-  # todo! large memory overhead here!
-  # dd <- copy(data)
-  # k <- key(dd)
-  #
-  # dd[, ..t.. := floor(t /summary_time_window) * summary_time_window]
-  #
-  #
-  # if(!is.null(time_wrap))
-  #   dd[, ..t.. := ..t.. %% time_wrap]
-
-  # setnames(dd, var_of_interest, "..voi..")
-  # sdt <- dd[, .(..voi.. = summary_FUN(..voi..)), by=c(k, "..t..")]
-
 
   sdt <- behavr::bin_apply_all(data,
                                var_of_interest,
@@ -109,12 +98,7 @@ ggetho <- function(data,
                                string_xy=T)
 
   data.table::setnames(sdt, mapping_list$x, "..t..")
-  #data.table::setnames(sdt, var_of_interest, "..voi..")
-  #return(sdt)
-  #sdt[,data.table::`:=`(..t.., hms::as.hms(..t..)) ]
   sdt[,..t.. := hms::as.hms(..t..) ]
-
-  # setkeyv(sdt,c("..t..",k))
   data.table::setnames(sdt,"..t..", mapping_list$x)
 
   sdt <- rejoin(sdt)

@@ -2,9 +2,11 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
-^README_files$
 ^\.travis\.yml$
 ^Makefile$
 ^cran-comments\.md$
 ^appveyor\.yml$
 ^revdep$
+^.*\.tar\.gz$
+^.*\.pdf$
+^\./README_files/$
