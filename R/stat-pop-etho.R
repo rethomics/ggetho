@@ -74,8 +74,9 @@ StatPopEtho <- ggplot2::ggproto("StatPopEtho", ggplot2::Stat,
                            all_args <- append(list(y), method.args)
                            do.call(method, all_args)
                          }
-                         out <- data[,foo(y)
-                                     ,by="x"]
+                         out <- data[,
+                                     foo(y),
+                                     keyby="x"]
                          out
                        },
                        required_aes = c("x", "y")
