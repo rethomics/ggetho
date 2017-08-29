@@ -13,6 +13,8 @@ vpath %.R  $(R_DIR)
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 all : check $(R_PDF)
 
+pdf: $(R_PDF)
+
 clean:
 	rm -fr  *.tar.gz *.out *.pdf  *.log  $(R_dir)/man $(R_dir)/NAMESPACE
 	$(MAKE) -C ./tutorial clean
@@ -27,7 +29,7 @@ R : tarball
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $(R_PDF) : R $(R_SOURCES)
-	R CMD Rd2pdf --force  -o $(R_PDF) .
+	R CMD Rd2pdf --force --batch --no-preview -o $(R_PDF) .
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $(R_TGZ) : $(R_SOURCES)
 	@echo "Roxygenising:"
