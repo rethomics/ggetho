@@ -16,9 +16,8 @@ all : check $(R_PDF)
 pdf: $(R_PDF)
 
 clean:
-	rm -fr  *.tar.gz *.out *.pdf  *.log  $(R_dir)/man $(R_dir)/NAMESPACE
-	$(MAKE) -C ./tutorial clean
-
+	rm -fr  *.tar.gz *.out *.pdf  *.log  $(R_dir)/man $(R_dir)/NAMESPACE README.md
+	
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 tarball : $(R_TGZ)
@@ -28,7 +27,7 @@ R : tarball
 	R CMD INSTALL --no-multiarch --with-keep.source  $(R_DIR)
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$(R_PDF) : R $(R_SOURCES)
+$(R_PDF) : $(R_SOURCES)
 	R CMD Rd2pdf --force --batch --no-preview -o $(R_PDF) .
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $(R_TGZ) : $(R_SOURCES)
@@ -38,7 +37,7 @@ $(R_TGZ) : $(R_SOURCES)
 	@echo "Building Package $(R_TGZ):"
 	@R CMD build $(R_DIR)
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-README.md: README.Rmd R
+README.md: README.Rmd
 	@echo "library(knitr); knit('README.Rmd')" | R --vanilla
 #I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 check: R

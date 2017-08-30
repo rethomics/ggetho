@@ -3,6 +3,7 @@
 language: R
 sudo: false
 cache: packages
+
 latex: true
 
 r:
@@ -11,8 +12,7 @@ r:
   - devel
 
 r_github_packages:
-  - rethomics/behavr
-
+   - rethomics/behavr
 
 r_packages:
   - covr
@@ -24,8 +24,8 @@ after_success:
 script:
     - R CMD build .
     - R CMD check *tar.gz
-    - make README.md
-    - make pdf
+    - sh .publish_doc.sh
+
 
 
 notifications:

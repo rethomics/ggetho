@@ -3,10 +3,10 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
+^\.publish_doc\.sh$
 ^Makefile$
 ^cran-comments\.md$
 ^appveyor\.yml$
 ^revdep$
 ^.*\.tar\.gz$
 ^.*\.pdf$
-^README_files/$
