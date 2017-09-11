@@ -91,11 +91,11 @@ ggetho <- function(data,
 
   sdt <- behavr::bin_apply_all(data,
                                var_of_interest,
-                               x=mapping_list$x,
+                               x = mapping_list$x,
                                x_bin_length = summary_time_window,
-                               wrap_x_by=time_wrap,
-                               FUN=summary_FUN,
-                               string_xy=T)
+                               wrap_x_by = time_wrap,
+                               FUN = summary_FUN,
+                               string_xy = TRUE)
 
   data.table::setnames(sdt, mapping_list$x, "..t..")
   sdt[,..t.. := hms::as.hms(..t..) ]
