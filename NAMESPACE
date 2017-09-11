@@ -2,6 +2,7 @@
 
 export(boot_ci)
 export(ggetho)
+export(id_labeller)
 export(stat_ld_annotations)
 export(stat_pop_etho)
 export(stat_tile_etho)
