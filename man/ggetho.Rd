@@ -39,11 +39,9 @@ For instance,  \code{time_offset = hours(12)} puts the circadian reference (ZT0)
 }
 \examples{
 # We start by making a to dataset with 20 animals
-library(behavr)
-query <- data.frame(experiment_id="toy_experiment",
-                   region_id=1:20,
+metadata <- data.table(id= sprintf("toy_experiment|\%02d", 1:20),
                    condition=c("A","B"))
-dt <- toy_activity_data(query,3)
+dt <- toy_activity_data(metadata, 3)
 # We build a plot object with **nothing inside** (just the axis)
 # we want to show proportion of time sleeping  on the y axis:
 pl <- ggetho(dt, aes(y=asleep))
@@ -56,6 +54,10 @@ pl
 # this one is the same type, but groups the animals by condition
 pl <- ggetho(dt, aes(z=asleep,y=condition))
 pl
+# sorting with paste
+pl <- ggetho(dt, aes(z=asleep,y=paste(condition, id)))
+pl
+
 # we want to summarise (wrap) data along a circadian day:
 pl <- ggetho(dt, aes(y=asleep), time_wrap=hours(24))
 pl

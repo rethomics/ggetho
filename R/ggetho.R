@@ -1,7 +1,3 @@
-#' @importFrom data.table ":="
-#' @import ggplot2
-#' @import  behavr
-NULL
 #' Prepare a ggplot object to represent behavioural data
 #'
 #' This function summarises a variable of interest (y or z axis)
@@ -23,11 +19,9 @@ NULL
 #' @return an initial plot object that can be further edited.
 #' @examples
 #' # We start by making a to dataset with 20 animals
-#' library(behavr)
-#' query <- data.frame(experiment_id="toy_experiment",
-#'                    region_id=1:20,
+#' metadata <- data.table(id= sprintf("toy_experiment|%02d", 1:20),
 #'                    condition=c("A","B"))
-#' dt <- toy_activity_data(query,3)
+#' dt <- toy_activity_data(metadata, 3)
 #' # We build a plot object with **nothing inside** (just the axis)
 #' # we want to show proportion of time sleeping  on the y axis:
 #' pl <- ggetho(dt, aes(y=asleep))
@@ -40,6 +34,10 @@ NULL
 #' # this one is the same type, but groups the animals by condition
 #' pl <- ggetho(dt, aes(z=asleep,y=condition))
 #' pl
+#' # sorting with paste
+#' pl <- ggetho(dt, aes(z=asleep,y=paste(condition, id)))
+#' pl
+#'
 #' # we want to summarise (wrap) data along a circadian day:
 #' pl <- ggetho(dt, aes(y=asleep), time_wrap=hours(24))
 #' pl
@@ -64,7 +62,7 @@ ggetho <- function(data,
     stop("Not implemented") #todo
   #todo check argument types!!
 
-  mapping_list <- lapply(mapping, as.character)
+  mapping_list <-as.list(as.character(mapping))
   aes_names <- names(mapping_list)
 
   has_colour = "colour" %in% aes_names
@@ -80,6 +78,8 @@ ggetho <- function(data,
   if(!"x" %in% aes_names)
     mapping_list$x = "t"
 
+  x_name <- mapping_list$x
+
   if("z" %in% aes_names)
     var_of_interest = mapping_list$z
   else if("y" %in% aes_names)
@@ -87,19 +87,17 @@ ggetho <- function(data,
   else
     stop("Either `y` or `z` should be provided as variable of interest")
 
-
-
   sdt <- behavr::bin_apply_all(data,
                                var_of_interest,
-                               x = mapping_list$x,
+                               x = x_name,
                                x_bin_length = summary_time_window,
                                wrap_x_by = time_wrap,
-                               FUN = summary_FUN,
-                               string_xy = TRUE)
+                               FUN = summary_FUN)
 
-  data.table::setnames(sdt, mapping_list$x, "..t..")
-  sdt[,..t.. := hms::as.hms(..t..) ]
-  data.table::setnames(sdt,"..t..", mapping_list$x)
+  data.table::setnames(sdt, mapping_list$x, "t__")
+  sdt[,t__ := hms::as.hms(t__) ]
+  data.table::setnames(sdt,"t__", mapping_list$x)
+
 
   sdt <- rejoin(sdt)
 
@@ -107,12 +105,24 @@ ggetho <- function(data,
   # discrete/factor axis with individuals as rows
   if(!"y" %in% aes_names){
     # todo check those columns exist
-    sdt[, experiment_id...region_id := as.factor(sprintf("%s...%02d",substr(experiment_id,1,26),region_id))]
-    mapping_list$y = "experiment_id...region_id"
+    mapping_list$y = "id"
   }
+
+
+  #mapping_list$x <-  paste0("`", mapping_list$x, "`")
+
+
+  mapping_list <- lapply(mapping_list,
+                         function(x){
+                                      if(x %in% colnames(sdt))
+                                        paste0("`", x, "`")
+                                      else
+                                        x
+                                    })
 
   mapping = do.call(aes_string, mapping_list)
   out <- ggplot(sdt, mapping,...)
+
   if(!is.null(time_wrap))
     return( out + scale_x_time(limits=c(0, time_wrap)))
   out

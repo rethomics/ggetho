@@ -63,10 +63,9 @@ This function is used to show light and dark (L and D) phases as boxes on top a 
 \examples{
 library(behavr)
 # we start by making a to dataset with 20 animals
-query <- data.frame(experiment_id="toy_experiment",
-                   region_id=1:20,
+metadata <- data.frame(id = sprintf("toy_experiment | \%02d", 1:20),
                    condition=c("A","B"))
-dt <- toy_activity_data(query,3)
+dt <- toy_activity_data(metadata,3)
 # We build a plot object
 pl <-  ggetho(dt, aes(y=asleep)) + stat_pop_etho()
 pl + stat_ld_annotations()

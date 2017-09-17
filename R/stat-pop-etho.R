@@ -13,13 +13,10 @@
 #' [boot_ci] can be used instead to generate bootstrap confidence interval.
 #' @examples
 #' library(behavr)
-#' # we start by making a to dataset with 20 animals
-#' query<- data.frame(experiment_id="toy_experiment",
-#'                    region_id=1:20,
-#'                    condition=c("A","B"),
-#'                    age=c(1, 5, 10, 20))
-#' print(query)
-#' dt <- toy_activity_data(query,seed=3)
+#' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
+#'                    age=c(1, 5, 10, 20),
+#'                    condition=c("A","B"))
+#' dt <- toy_activity_data(metadata,3)
 #' # We build a plot object
 #' pl <-  ggetho(dt, aes(y=asleep))
 #' # A standard plot of the whole population:
@@ -35,7 +32,8 @@
 #' pl <-  ggetho(dt, aes(y=asleep, colour=age))
 #' pl + stat_pop_etho()
 #' # sometimes we want to aggreate several days of data to one circadian day (i.e. time wrapping)
-#' pl <-  ggetho(dt, aes(y=moving), time_wrap=hours(24))
+#' # here, we also plot the invert of moving (!moving)
+#' pl <-  ggetho(dt, aes(y=!moving), time_wrap=hours(24))
 #' pl + stat_pop_etho()
 #' @seealso
 #' * [ggetho] to generate a plot object
