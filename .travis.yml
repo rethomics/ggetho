@@ -10,7 +10,7 @@ env:
     global:
         - MAKEFLAGS="-j 2"
 
-github_packages:
+r_github_packages:
     rethomics/behavr
 
 matrix:
