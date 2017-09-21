@@ -45,11 +45,18 @@ We "make"" 20 animals with two conditions and four age groups.
 
 ```r
 library(behavr)
+```
+
+```
+## Loading required package: data.table
+```
+
+```r
 library(ggetho)
 ```
 
 ```
-## Loading required package: ggplot2
+## Error in library(ggetho): there is no package called 'ggetho'
 ```
 
 ```r
@@ -86,51 +93,25 @@ print(query)
 
 ```r
 dt <- toy_activity_data(query,seed=3)
+```
+
+```
+## Error in toy_activity_data(query, seed = 3): The provided toy query must have, at least, a named column id
+```
+
+```r
 dt
 ```
 
 ```
-## 
-##  ==== METADATA ====
-## 
-##                    id  experiment_id region_id condition   age
-##                <fctr>         <fctr>     <int>    <fctr> <num>
-##  1: 01|toy_experiment toy_experiment         1         A     1
-##  2: 02|toy_experiment toy_experiment         2         B     5
-##  3: 03|toy_experiment toy_experiment         3         A    10
-##  4: 04|toy_experiment toy_experiment         4         B    20
-##  5: 05|toy_experiment toy_experiment         5         A     1
-##  6: 06|toy_experiment toy_experiment         6         B     5
-##  7: 07|toy_experiment toy_experiment         7         A    10
-##  8: 08|toy_experiment toy_experiment         8         B    20
-##  9: 09|toy_experiment toy_experiment         9         A     1
-## 10: 10|toy_experiment toy_experiment        10         B     5
-## 11: 11|toy_experiment toy_experiment        11         A    10
-## 12: 12|toy_experiment toy_experiment        12         B    20
-## 13: 13|toy_experiment toy_experiment        13         A     1
-## 14: 14|toy_experiment toy_experiment        14         B     5
-## 15: 15|toy_experiment toy_experiment        15         A    10
-## 16: 16|toy_experiment toy_experiment        16         B    20
-## 17: 17|toy_experiment toy_experiment        17         A     1
-## 18: 18|toy_experiment toy_experiment        18         B     5
-## 19: 19|toy_experiment toy_experiment        19         A    10
-## 20: 20|toy_experiment toy_experiment        20         B    20
-##                    id  experiment_id region_id condition   age
-## 
-##  ====== DATA ======
-## 
-##                        id      t moving asleep
-##                    <fctr>  <num> <lgcl> <lgcl>
-##      1: 01|toy_experiment      0  FALSE  FALSE
-##      2: 01|toy_experiment     10  FALSE  FALSE
-##      3: 01|toy_experiment     20  FALSE  FALSE
-##      4: 01|toy_experiment     30  FALSE  FALSE
-##     ---                                       
-## 864016: 20|toy_experiment 431960   TRUE  FALSE
-## 864017: 20|toy_experiment 431970  FALSE  FALSE
-## 864018: 20|toy_experiment 431980  FALSE  FALSE
-## 864019: 20|toy_experiment 431990  FALSE  FALSE
-## 864020: 20|toy_experiment 432000  FALSE  FALSE
+## function (x, df, ncp, log = FALSE) 
+## {
+##     if (missing(ncp)) 
+##         .Call(C_dt, x, df, log)
+##     else .Call(C_dnt, x, df, ncp, log)
+## }
+## <bytecode: 0x343cc68>
+## <environment: namespace:stats>
 ```
 As you can see, in addition to the `id` column,
 which uniquely identify an animal, our data has three variables: 
@@ -146,10 +127,19 @@ then we would start by "translating" this verbal request to an object like this:
 
 ```r
 pl1 <- ggetho(dt, aes(y=moving, colour=condition))
+```
+
+```
+## Error in ggetho(dt, aes(y = moving, colour = condition)): could not find function "ggetho"
+```
+
+```r
 pl1
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl1' not found
+```
 
 Again, **this plot is empty** because no layer was added yet.
 Though it already knows the names and scale of the axis.
@@ -159,20 +149,38 @@ Sometimes, the variable of interest will not be on the y axis, instead, we want 
 
 ```r
 pl2 <- ggetho(dt, aes(z=moving))
+```
+
+```
+## Error in ggetho(dt, aes(z = moving)): could not find function "ggetho"
+```
+
+```r
 pl2
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl2' not found
+```
 
 
 Instead of having one row per animal, we may want to show a tile plot where populations of animals are **averaged** per condition, so `condition` is on the y axis, we have one row per condition and we show the variable of interest as a colour value:
 
 ```r
 pl3 <- ggetho(dt, aes(y=condition, z=moving))
+```
+
+```
+## Error in ggetho(dt, aes(y = condition, z = moving)): could not find function "ggetho"
+```
+
+```r
 pl3
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl3' not found
+```
 
 
 As an appetiser, let's have a look at two layers we can use `stat_pop_etho()` and `stat_tile_etho()`.
@@ -184,7 +192,9 @@ As an appetiser, let's have a look at two layers we can use `stat_pop_etho()` an
 pl1 + stat_pop_etho() 
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl1' not found
+```
 
 `stat_tile_etho` shows the variable of interest on a coulour intensity `z` axis):
 
@@ -193,7 +203,9 @@ pl1 + stat_pop_etho()
 pl2 + stat_tile_etho() 
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl2' not found
+```
 
 
 ## LD annotations
@@ -205,7 +217,9 @@ When studing biological rhythms, we often want to add to our plots information a
 pl1 + stat_pop_etho() + stat_ld_annotations()
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl1' not found
+```
 
 Note that, LD annotations will also work on tile plot.
 the function comes with extra arguments. 
@@ -217,7 +231,9 @@ pl1 + stat_pop_etho() +
   stat_ld_annotations(ld_colours = c("grey","black"), period = hours(23))
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl1' not found
+```
 
 ## Facets
 
@@ -227,11 +243,20 @@ For example, we can make one subplot (row), for each level of `condition`.
 
 ```r
 pl1 <- ggetho(dt, aes(y=moving))
+```
+
+```
+## Error in ggetho(dt, aes(y = moving)): could not find function "ggetho"
+```
+
+```r
 pl1 + stat_pop_etho() + stat_ld_annotations() +
   facet_grid( condition ~ .)
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl1' not found
+```
 
 ## Coordinates and scales
 
@@ -241,11 +266,27 @@ Sometimes, it can be interesting to show circadian data in a circular (polar) co
 
 ```r
 pl4 <- ggetho(dt, aes(y=asleep, fill=condition), time_wrap = hours(24))
+```
+
+```
+## Error in ggetho(dt, aes(y = asleep, fill = condition), time_wrap = hours(24)): could not find function "ggetho"
+```
+
+```r
 pl4 <- pl4 + stat_pop_etho() + coord_polar() 
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'pl4' not found
+```
+
+```r
 pl4
 ```
 
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png)
+```
+## Error in eval(expr, envir, enclos): object 'pl4' not found
+```
  
 
 ## Going further
