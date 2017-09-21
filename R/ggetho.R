@@ -96,6 +96,9 @@ ggetho <- function(data,
 
   data.table::setnames(sdt, mapping_list$x, "t__")
   sdt[,t__ := hms::as.hms(t__) ]
+
+  rng <- as.numeric(range(sdt[,t__]))
+
   data.table::setnames(sdt,"t__", mapping_list$x)
 
 
@@ -120,15 +123,23 @@ ggetho <- function(data,
                                         x
                                     })
 
+  diff <- rng[2] - rng[1]
+
+  if(diff > behavr::days(3)){
+    scale_x_FUN <- scale_x_days
+  }
+  else if(diff > behavr::hours(3)){
+    scale_x_FUN <- scale_x_hours
+  }
+  else{
+    scale_x_FUN <- scale_x_seconds
+  }
+
   mapping = do.call(aes_string, mapping_list)
   out <- ggplot(sdt, mapping,...)
 
   if(!is.null(time_wrap))
-    return( out + scale_x_time(limits=c(0, time_wrap)))
-  out
+    return( out + scale_x_FUN(limits=c(0, time_wrap)))
+
+  out + scale_x_FUN()
 }
-
-
-
-
-

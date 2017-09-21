@@ -13,7 +13,9 @@ Depends:
 Imports:
     data.table,
     hms,
-    stringr
+    stringr,
+    scales,
+    labeling
 Suggests: 
     testthat,
     covr,

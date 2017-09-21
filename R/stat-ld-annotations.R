@@ -11,7 +11,7 @@
 #' The defaults, "auto" will put the labels below any data.
 #' @param period,phase period and phase (in seconds) of the LD cycle.
 #' @examples
- #' library(behavr)
+#' library(behavr)
 #' # we start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
 #'                    condition=c("A","B"))
