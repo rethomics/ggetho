@@ -110,7 +110,7 @@ dt
 ##         .Call(C_dt, x, df, log)
 ##     else .Call(C_dnt, x, df, ncp, log)
 ## }
-## <bytecode: 0x2acdc68>
+## <bytecode: 0x2a77ca0>
 ## <environment: namespace:stats>
 ```
 As you can see, in addition to the `id` column,
