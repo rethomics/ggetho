@@ -26,8 +26,8 @@ scale_x_hours <- function(name = "Time (h)",
 hours_trans <- function() {
   scales::trans_new(
     "hours",
-    transform = function(x){ structure(as.numeric(x) /3600, names = names(x))},
-    inverse = function(x){as.numeric(x) * 3600},
+    transform = function(x){ structure(as.numeric(x) , names = names(x))},
+    inverse = function(x){as.numeric(x) },
     breaks = hours_breaks(),
     format = function(x)format(as.numeric(x) / 3600)
   )

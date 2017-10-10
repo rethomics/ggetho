@@ -56,8 +56,8 @@ scale_x_days <- function(name = "Time (day)",
 days_trans <- function() {
   scales::trans_new(
     "days",
-    transform = function(x){ structure(as.numeric(x) / 86400, names = names(x))},
-    inverse = function(x){x * 86400},
+    transform = function(x){ structure(as.numeric(x), names = names(x))},
+    inverse = function(x){x},
     breaks = days_breaks(),
     format = function(x)format(as.numeric(x) / 86400)
   )

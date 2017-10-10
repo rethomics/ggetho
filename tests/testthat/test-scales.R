@@ -11,7 +11,7 @@ test_that("scales work", {
   five_day <- round(-5:5  * 24 * 3600)
 
 
-  htr <- hours_trans()
+  htr <- ggetho:::hours_trans()
 
   #(three_day/10) / behavr::hours(1)
 
@@ -25,7 +25,7 @@ test_that("scales work", {
   htr$breaks(three_day/13)
   htr$breaks(five_day/13)
 
-  dtr <- days_trans()
+  dtr <- ggetho:::days_trans()
   dtr$breaks(one_h)
   dtr$breaks(one_h/3)
   dtr$breaks(three_h)
