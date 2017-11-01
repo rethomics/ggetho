@@ -7,8 +7,10 @@
 #' @inheritParams ggplot2::geom_rect
 #' @param ld_colours character vector of length 2 naming the colours for light and dark phases, respectively.
 #' The default is white and black.
-#' @param ypos,height The position and height of the annotation on the y axis.
-#' The defaults, "auto" will put the labels below any data.
+#' @param ypos The position and height of the annotation on the y axis.
+#' The default, "bottom" will put the labels below any data.
+#' @param height the relative height of the rectangles. The feault is 3% (0.03).
+#' The defaults, "bottom" will put the labels below any data.
 #' @param period,phase period and phase (in seconds) of the LD cycle.
 #' @examples
 #' library(behavr)
@@ -34,8 +36,8 @@ stat_ld_annotations <- function (mapping = NULL,
                                  data = NULL,
                                  position = "identity",
                                  ld_colours = c("white", "black"),
-                                 ypos = "auto",
-                                 height = "auto",
+                                 ypos = "bottom",
+                                 height = 0.03,
                                  period = hours(24),
                                  phase = 0,
                                  ...,
@@ -44,8 +46,7 @@ stat_ld_annotations <- function (mapping = NULL,
                                  inherit.aes = TRUE)
 {
   layer(data = data, mapping = mapping, stat = StatLDAnnotation,
-        geom = ggplot2::GeomRect,
-        #geom = GeomRect,
+        geom = GeomLD,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, ld_colours=ld_colours, ypos=ypos,height=height,
                       phase=phase, period=period,ld_boxes=NULL, ...))
@@ -56,20 +57,6 @@ StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
                                               alpha = .66),
                             setup_params = function(data, params){
                               out <- ldAnnotation(data$x,params$period,params$phase)
-                              if(params$ypos != "auto")
-                                out[,ypos:=params$ypos]
-                              else{
-                                range <- max(data$y) - min(data$y)
-                                out[,ypos := min(data$y) - range * .05]
-                              }
-                              if(params$height != "auto")
-                                out[,height:=params$height]
-                              else{
-                                range <- max(data$y) - min(data$y)
-                                out[, height :=  range * .02]
-                              }
-                              out[,ymin:= ypos-height/2]
-                              out[,ymax:= ypos+height/2]
                               params$ld_boxes <-out
                               params
                             },
@@ -103,3 +90,90 @@ ldAnnotation <- function(x, period=1, phase=0){
   out
 }
 
+geom_ld <- function(mapping = NULL, data = NULL,
+                    stat = "identity", position = "identity",
+                    ...,
+                    sides = "bl",
+                    na.rm = FALSE,
+                    show.legend = NA,
+                    inherit.aes = FALSE) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomLD,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      sides = sides,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+
+
+GeomLD <- ggproto("GeomLD", Geom,
+                  required_aes = c("xmin", "xmax"),
+
+                  draw_panel = function(data, panel_params, coord, ypos = "bottom", height = 0.03) {
+
+                    ymin <-ifelse(ypos == "top", 1, 0)
+                    ymax <-ifelse(ypos == "top",  ymin - height,  ymin + height)
+
+                    if (!coord$is_linear()) {
+                      data$ymin <- unit(ymin, "npc")
+                      data$ymax <-  unit(ymax, "npc")
+                      aesthetics <- setdiff(
+                        names(data), c("x", "y", "xmin", "xmax", "ymin", "ymax")
+                      )
+
+                      polys <- plyr::alply(data, 1, function(row) {
+                        poly <- rect_to_poly(row$xmin, row$xmax, row$ymin, row$ymax)
+                        aes <- as.data.frame(row[aesthetics],
+                                             stringsAsFactors = FALSE)[rep(1,5), ]
+
+                        GeomPolygon$draw_panel(cbind(poly, aes), panel_params, coord)
+                      })
+
+                      ggname("bar", do.call(grid::grobTree, polys))
+                    } else {
+
+                      coords <- coord$transform(data, panel_params)
+
+                      coords$ymin <- unit(ymin, "npc")
+                      coords$ymax <-  unit(ymax, "npc")
+
+                      ggname("geom_rect", grid::rectGrob(
+                        coords$xmin, coords$ymax,
+                        width = coords$xmax - coords$xmin,
+                        height = coords$ymax - coords$ymin,
+                        default.units = "native",
+                        just = c("left", "top"),
+                        gp = grid::gpar(
+                          col = coords$colour,
+                          fill = alpha(coords$fill, coords$alpha),
+                          lwd = coords$size * .pt,
+                          lty = coords$linetype,
+                          lineend = "butt"
+                        )
+                      ))
+                    }
+                  },
+
+                  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
+
+                  draw_key = draw_key_path
+)
+
+
+ggname <- function (prefix, grob){
+  grob$name <- grid::grobName(grob, prefix)
+  grob
+}
+rect_to_poly <- function (xmin, xmax, ymin, ymax){
+  data.frame(y = c(ymax, ymax, ymin, ymin, ymax),
+             x = c(xmin, xmax, xmax, xmin, xmin))
+}
