@@ -80,8 +80,11 @@ ggetho <- function(data,
 
   x_name <- mapping_list$x
 
-  if("z" %in% aes_names)
+  discrete_y <- FALSE
+  if("z" %in% aes_names){
     var_of_interest = mapping_list$z
+    discrete_y <- TRUE
+  }
   else if("y" %in% aes_names)
     var_of_interest = mapping_list$y
   else
@@ -137,6 +140,16 @@ ggetho <- function(data,
 
   mapping = do.call(aes_string, mapping_list)
   out <- ggplot(sdt, mapping,...)
+
+  if(discrete_y){
+    p <- ggplot_build(out)
+    yr <- p$layout$panel_ranges[[1]]$y.range
+    ymin <- yr[1]
+    ymax <- yr[2]
+    mar <- c(ymin - (ymax-ymin) *0.03, (ymax-ymin) + 0.5 +  (ymax-ymin) *0.03)
+    out <- out + geom_blank() +   geom_blank(aes(y=y), data.frame(y=mar), inherit.aes = FALSE)
+  }
+
 
   if(!is.null(time_wrap))
     return( out + scale_x_FUN(limits=c(0, time_wrap)))

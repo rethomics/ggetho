@@ -16,5 +16,3 @@ test_that("annotations work", {
 
 })
 
-
-

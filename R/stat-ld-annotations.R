@@ -71,7 +71,7 @@ StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
                               data$colour="black"
                               data
                             },
-                            required_aes = c("x","y"),
+                            required_aes = c("x"),
                             draw_key = ggplot2::draw_key_polygon
 )
 
@@ -122,7 +122,7 @@ GeomLD <- ggproto("GeomLD", Geom,
 
                     ymin <-ifelse(ypos == "top", 1, 0)
                     ymax <-ifelse(ypos == "top",  ymin - height,  ymin + height)
-
+                    print(coord$is_linear())
                     if (!coord$is_linear()) {
                       data$ymin <- unit(ymin, "npc")
                       data$ymax <-  unit(ymax, "npc")
