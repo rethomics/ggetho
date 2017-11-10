@@ -122,7 +122,6 @@ GeomLD <- ggproto("GeomLD", Geom,
 
                     ymin <-ifelse(ypos == "top", 1, 0)
                     ymax <-ifelse(ypos == "top",  ymin - height,  ymin + height)
-                    print(coord$is_linear())
                     if (!coord$is_linear()) {
                       data$ymin <- unit(ymin, "npc")
                       data$ymax <-  unit(ymax, "npc")

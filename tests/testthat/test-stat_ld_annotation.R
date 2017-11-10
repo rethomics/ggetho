@@ -12,7 +12,5 @@ test_that("annotations work", {
   expect_equal(ggplot_build(pld)$data[[1]], ggplot_build(plh)$data[[1]])
   expect_equal(ggplot_build(plc)$data[[1]], ggplot_build(plh)$data[[1]])
   pld
-
-
 })
 
