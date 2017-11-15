@@ -7,10 +7,10 @@
 #' @inheritParams ggplot2::geom_rect
 #' @param ld_colours character vector of length 2 naming the colours for light and dark phases, respectively.
 #' The default is white and black.
-#' @param ypos The position and height of the annotation on the y axis.
-#' The default, "bottom" will put the labels below any data.
-#' @param height the relative height of the rectangles. The feault is 3% (0.03).
-#' The defaults, "bottom" will put the labels below any data.
+#' @param ypos The position and height of the annotation on the y axis. It can be either `"top"` of `"bottom"`.
+#' The default, `"bottom"` will put the labels below any data.
+#' @param height the relative height of the rectangles. The default is 3 percent (0.03).
+#' @param outline the colour of the border of the rectangles. `NA` means no border.
 #' @param period,phase period and phase (in seconds) of the LD cycle.
 #' @examples
 #' library(behavr)
@@ -22,7 +22,10 @@
 #' pl <-  ggetho(dt, aes(y=asleep)) + stat_pop_etho()
 #' pl + stat_ld_annotations()
 #' # We can also put the annotations in the background:
-#' pl + stat_ld_annotations(height=1, colour=NA, alpha=.2)
+#' pl <-  ggetho(dt, aes(y=asleep)) +
+#'                  stat_ld_annotations(outline=NA) +
+#'                  stat_pop_etho()
+#' pl
 #' # different colours (e.g. DD)
 #' pl + stat_ld_annotations(ld_colour=c("grey", "black"))
 #' # shorter period
@@ -42,6 +45,7 @@ stat_ld_annotations <- function (mapping = NULL,
                                  height = 0.03,
                                  period = hours(24),
                                  phase = 0,
+                                 outline = "black",
                                  ...,
                                  na.rm = FALSE,
                                  show.legend = FALSE,
@@ -51,12 +55,12 @@ stat_ld_annotations <- function (mapping = NULL,
         geom = GeomLD,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, ld_colours=ld_colours, ypos=ypos,height=height,
-                      phase=phase, period=period,ld_boxes=NULL, ...))
+                      phase=phase, period=period,ld_boxes=NULL, outline=outline, ...))
 }
 
 StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
                             default_aes = ggplot2::aes(colour = "black", size = 0.5, linetype = 1,
-                                              alpha = .66),
+                                              alpha = .67),
                             setup_params = function(data, params){
                               out <- ldAnnotation(data$x,params$period,params$phase)
                               params$ld_boxes <-out
@@ -64,13 +68,13 @@ StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
                             },
 
                             compute_group = function(data, scales,ld_colours, ld_boxes,ypos,
-                                                     height,phase,period,...) {
+                                                     height,phase,period, outline,...) {
                               ld_boxes
                             },
 
                             finish_layer = function(data, params) {
                               data$fill <- params$ld_colours[(data$ld=="L")+1]
-                              #data$colour="black"
+                              data$colour=params$outline
                               data
                             },
                             required_aes = c("x"),

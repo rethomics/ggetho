@@ -6,7 +6,7 @@
 \usage{
 stat_ld_annotations(mapping = NULL, data = NULL, position = "identity",
   ld_colours = c("white", "black"), ypos = "bottom", height = 0.03,
-  period = hours(24), phase = 0, ..., na.rm = FALSE,
+  period = hours(24), phase = 0, outline = "black", ..., na.rm = FALSE,
   show.legend = FALSE, inherit.aes = TRUE)
 }
 \arguments{
@@ -35,13 +35,14 @@ a call to a position adjustment function.}
 \item{ld_colours}{character vector of length 2 naming the colours for light and dark phases, respectively.
 The default is white and black.}
 
-\item{ypos}{The position and height of the annotation on the y axis.
-The default, "bottom" will put the labels below any data.}
+\item{ypos}{The position and height of the annotation on the y axis. It can be either \code{"top"} of \code{"bottom"}.
+The default, \code{"bottom"} will put the labels below any data.}
 
-\item{height}{the relative height of the rectangles. The feault is 3% (0.03).
-The defaults, "bottom" will put the labels below any data.}
+\item{height}{the relative height of the rectangles. The default is 3 percent (0.03).}
 
 \item{period, phase}{period and phase (in seconds) of the LD cycle.}
+
+\item{outline}{the colour of the border of the rectangles. \code{NA} means no border.}
 
 \item{...}{other arguments passed on to \code{\link{layer}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
@@ -72,6 +73,11 @@ dt <- toy_activity_data(metadata,3)
 # We build a plot object
 pl <-  ggetho(dt, aes(y=asleep)) + stat_pop_etho()
 pl + stat_ld_annotations()
+# We can also put the annotations in the background:
+pl <-  ggetho(dt, aes(y=asleep)) +
+                 stat_ld_annotations(outline=NA) +
+                 stat_pop_etho()
+pl
 # different colours (e.g. DD)
 pl + stat_ld_annotations(ld_colour=c("grey", "black"))
 # shorter period
