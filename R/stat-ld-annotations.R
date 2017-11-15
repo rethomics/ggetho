@@ -21,6 +21,8 @@
 #' # We build a plot object
 #' pl <-  ggetho(dt, aes(y=asleep)) + stat_pop_etho()
 #' pl + stat_ld_annotations()
+#' # We can also put the annotations in the background:
+#' pl + stat_ld_annotations(height=1, colour=NA, alpha=.2)
 #' # different colours (e.g. DD)
 #' pl + stat_ld_annotations(ld_colour=c("grey", "black"))
 #' # shorter period
@@ -68,7 +70,7 @@ StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
 
                             finish_layer = function(data, params) {
                               data$fill <- params$ld_colours[(data$ld=="L")+1]
-                              data$colour="black"
+                              #data$colour="black"
                               data
                             },
                             required_aes = c("x"),
