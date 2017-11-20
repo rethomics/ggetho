@@ -6,8 +6,8 @@
 \usage{
 stat_ld_annotations(mapping = NULL, data = NULL, position = "identity",
   ld_colours = c("white", "black"), ypos = "bottom", height = 0.03,
-  period = hours(24), phase = 0, outline = "black", ..., na.rm = FALSE,
-  show.legend = FALSE, inherit.aes = TRUE)
+  period = hours(24), phase = 0, outline = "black", x_limits = NA, ...,
+  na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
@@ -35,14 +35,17 @@ a call to a position adjustment function.}
 \item{ld_colours}{character vector of length 2 naming the colours for light and dark phases, respectively.
 The default is white and black.}
 
-\item{ypos}{The position and height of the annotation on the y axis. It can be either \code{"top"} of \code{"bottom"}.
+\item{ypos}{position and height of the annotation on the y axis. It can be either \code{"top"} of \code{"bottom"}.
 The default, \code{"bottom"} will put the labels below any data.}
 
-\item{height}{the relative height of the rectangles. The default is 3 percent (0.03).}
+\item{height}{relative height of the rectangles. The default is 3 percent (0.03).}
 
 \item{period, phase}{period and phase (in seconds) of the LD cycle.}
 
-\item{outline}{the colour of the border of the rectangles. \code{NA} means no border.}
+\item{outline}{colour of the border of the rectangles. \code{NA} means no border.}
+
+\item{x_limits}{numerical vector of length 2 for the start and end of the annotations (in seconds).
+The default, \code{NA}, uses the full range of the plotted data.}
 
 \item{...}{other arguments passed on to \code{\link{layer}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like

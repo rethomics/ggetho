@@ -18,4 +18,3 @@ test_that("annotations work", {
   pl <- ggetho(dt, aes(t,x)) + stat_ld_annotations(colour=NA)
   pl
 })
-
