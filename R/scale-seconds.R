@@ -1,4 +1,5 @@
-#' @rdname scale_x_days
+#' @rdname time_scales
+#' @export
 scale_x_seconds <- function(name = "Time (s)",
                           breaks = waiver(),
                           minor_breaks = waiver(),
