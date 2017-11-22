@@ -8,7 +8,8 @@ scale_x_days <- function(name = "Time (day)",
                          expand = waiver(),
                          oob = scales::censor,
                          na.value = NA_real_,
-                         position = "bottom") {
+                         position = "bottom",
+                         time_wrap = NULL) {
 
   scale_x_continuous(
     name = name,
@@ -20,7 +21,7 @@ scale_x_days <- function(name = "Time (day)",
     oob = oob,
     na.value = na.value,
     position = position,
-    trans = days_trans()
+    trans = days_trans(time_wrap)
   )
 }
 
@@ -31,13 +32,18 @@ scale_x_days <- function(name = "Time (day)",
 #' t$inverse(t$transform(hms))
 #' t$breaks(hms)
 #' @noRd
-days_trans <- function() {
+days_trans <- function(time_wrap = NULL) {
+  if(is.null(time_wrap))
+    formater <- function(x)format(as.numeric(x) / 86400)
+  else
+    formater <- function(x)format((as.numeric(x) %% time_wrap) / 86400)
+
   scales::trans_new(
     "days",
     transform = function(x){ structure(as.numeric(x), names = names(x))},
     inverse = function(x){x},
     breaks = days_breaks(),
-    format = function(x)format(as.numeric(x) / 86400)
+    format = formater
   )
 }
 

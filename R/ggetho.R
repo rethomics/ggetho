@@ -58,8 +58,9 @@ ggetho <- function(data,
                     # todo add time wrap offset / double plotting
                     ...){
 
-  if(!is.null(time_offset))
-    stop("Not implemented") #todo
+  if(is.null(time_wrap) & !is.null(time_offset))
+    stop("Time offset is only relevant in the context of time wrapping")
+
   #todo check argument types!!
 
   mapping_list <-as.list(as.character(mapping))
@@ -113,10 +114,6 @@ ggetho <- function(data,
     # todo check those columns exist
     mapping_list$y = "id"
   }
-
-
-  #mapping_list$x <-  paste0("`", mapping_list$x, "`")
-
 
   mapping_list <- lapply(mapping_list,
                          function(x){

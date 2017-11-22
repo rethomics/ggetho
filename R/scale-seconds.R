@@ -8,7 +8,8 @@ scale_x_seconds <- function(name = "Time (s)",
                           expand = waiver(),
                           oob = scales::censor,
                           na.value = NA_real_,
-                          position = "bottom") {
+                          position = "bottom",
+                          time_wrap = NULL) {
 
   scale_x_continuous(
     name = name,
@@ -19,6 +20,21 @@ scale_x_seconds <- function(name = "Time (s)",
     expand = expand,
     oob = oob,
     na.value = na.value,
-    position = position
+    position = position,
+    trans = seconds_trans(time_wrap)
+  )
+}
+
+seconds_trans <- function(time_wrap = NULL) {
+  if(is.null(time_wrap))
+    formater <- function(x)format(as.numeric(x))
+  else
+    formater <- function(x)format((as.numeric(x) %% time_wrap))
+
+  scales::trans_new(
+    "seconds",
+    transform = function(x){structure(as.numeric(x), names = names(x))},
+    inverse = function(x){as.numeric(x) },
+    format = formater
   )
 }

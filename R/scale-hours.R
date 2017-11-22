@@ -8,7 +8,8 @@ scale_x_hours <- function(name = "Time (h)",
                           expand = waiver(),
                           oob = scales::censor,
                           na.value = NA_real_,
-                          position = "bottom") {
+                          position = "bottom",
+                          time_wrap = NULL) {
 
   scale_x_continuous(
     name = name,
@@ -20,17 +21,22 @@ scale_x_hours <- function(name = "Time (h)",
     oob = oob,
     na.value = na.value,
     position = position,
-    trans = hours_trans()
+    trans = hours_trans(time_wrap)
   )
 }
 
-hours_trans <- function() {
+hours_trans <- function(time_wrap  = NULL) {
+  if(is.null(time_wrap))
+    formater <- function(x)format(as.numeric(x) / 3600)
+  else
+    formater <- function(x)format((as.numeric(x) %% time_wrap) / 3600)
+
   scales::trans_new(
     "hours",
     transform = function(x){ structure(as.numeric(x) , names = names(x))},
     inverse = function(x){as.numeric(x) },
     breaks = hours_breaks(),
-    format = function(x)format(as.numeric(x) / 3600)
+    format = formater
   )
 }
 
