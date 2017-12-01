@@ -10,12 +10,23 @@
 #' @param summary_time_window width (in seconds) of the time window to compute a summary on
 #' @param time_wrap time (in seconds) used to wrap the data (see details)
 #' @param time_offset time offset (i.e. phase, in seconds) when using `time_wrap`
+#' @param multiplot integer, greater than two, or NULL, the default (see details)
+#' @param multiplot_period the duration of the period when mutiplotting (see details)
 #' @param ... additional arguments to be passed to [ggplot2::ggplot()]
 #' @details `time_wrap` is typically used to express time relatively to the start of the the day.
 #' In other words, it can help be used to pull all days together in one representative day.
 #' In this case, `time_wrap = hours(24)`.
 #' Instead of representing data from the start of the day, it can be done from any offset, using `time_offset`.
 #' For instance,  `time_offset = hours(12)` puts the circadian reference (ZT0) in the middle of the plot.
+#'
+#' Multiplots is a generalistion of double-plotting, tripple-plotting...
+#' This type or representation is usefull to understand periodic behaviours.
+#' When `multiplot` is not NULL, data is repeated as
+#' many time along the x axis to generate a double (when `multiplot=2`) plotted actogram
+#' The y axis then is the period (typically the day) onset.
+#' It is possible to set duration of the period, which is typically 24h to arbitrary values using the
+#' `multiplot_period` argument.
+#'
 #' @return an initial plot object that can be further edited.
 #' @examples
 #' # We start by making a to dataset with 20 animals
@@ -41,6 +52,14 @@
 #' # we want to summarise (wrap) data along a circadian day:
 #' pl <- ggetho(dt, aes(y=asleep), time_wrap=hours(24))
 #' pl
+#'
+#' # double ploted actogram:
+#' pl <- ggetho(dt,
+#'               aes(z=moving),
+#'               multiplot = 2,
+#'               multiplot_period = hours(24))
+#' pl
+#' # then use `+ stat_tile_etho()` , or `+ stat_bar_tile_etho()`
 #' @seealso
 #' * [stat_pop_etho] to show population trend by aggregating individuals over time
 #' * [stat_tile_etho] to show variable of interest as colour intensity
@@ -56,11 +75,19 @@ ggetho <- function(data,
                     time_wrap=NULL,
                     time_offset=NULL,
                     # todo add time wrap offset / double plotting
+                    multiplot=NULL, # 1
+                    multiplot_period= hours(24),
                     ...){
 
   if(!is.null(time_offset))
     stop("Not implemented") #todo
   #todo check argument types!!
+  if(!is.null(multiplot)){
+  if(!is.null(time_wrap))
+    stop("Cannot use time wrapping on a multiplot!") #todo
+  if(!multiplot %in% 2:10000)
+    stop("multiplot must be an integer >1, typically 2, for double plotting")
+  }
 
   mapping_list <-as.list(as.character(mapping))
   aes_names <- names(mapping_list)
@@ -79,12 +106,12 @@ ggetho <- function(data,
     mapping_list$x = "t"
 
   x_name <- mapping_list$x
-
   discrete_y <- FALSE
   if("z" %in% aes_names){
     var_of_interest = mapping_list$z
     discrete_y <- TRUE
   }
+
   else if("y" %in% aes_names)
     var_of_interest = mapping_list$y
   else
@@ -96,28 +123,28 @@ ggetho <- function(data,
                                x_bin_length = summary_time_window,
                                wrap_x_by = time_wrap,
                                FUN = summary_FUN)
-
-  data.table::setnames(sdt, mapping_list$x, "t__")
-  sdt[,t__ := hms::as.hms(t__) ]
-
-  rng <- as.numeric(range(sdt[,t__]))
-
-  data.table::setnames(sdt,"t__", mapping_list$x)
-
-
   sdt <- rejoin(sdt)
-
-  # when no `y`` is provided, the default is to have a
+  # when no `y` is provided, the default is to have a
   # discrete/factor axis with individuals as rows
-  if(!"y" %in% aes_names){
-    # todo check those columns exist
-    mapping_list$y = "id"
+
+  if(is.null(multiplot)){
+    if(!"y" %in% aes_names){
+      # todo check those columns exist
+      mapping_list$y = "id"
+    }
+  }
+  else{
+    if("y" %in% aes_names){
+      stop("Cannot use y AND multiplot.
+            When multiploting, the y axis is used for consecutive periods,
+            the variable of interest should be on the z axis")
+    }
+    sdt <- make_multiplot(sdt, multiplot, multiplot_period, summary_time_window)
+    mapping_list$y = "period"
+    discrete_y <- TRUE
   }
 
-
-  #mapping_list$x <-  paste0("`", mapping_list$x, "`")
-
-
+  scale_x_FUN <- auto_x_time_scale(sdt[[mapping_list$x]])
   mapping_list <- lapply(mapping_list,
                          function(x){
                                       if(x %in% colnames(sdt))
@@ -126,20 +153,10 @@ ggetho <- function(data,
                                         x
                                     })
 
-  diff <- rng[2] - rng[1]
-
-  if(diff > behavr::days(3)){
-    scale_x_FUN <- scale_x_days
-  }
-  else if(diff > behavr::hours(3)){
-    scale_x_FUN <- scale_x_hours
-  }
-  else{
-    scale_x_FUN <- scale_x_seconds
-  }
-
   mapping = do.call(aes_string, mapping_list)
   out <- ggplot(sdt, mapping,...)
+  # add some vertical margin  to the plot when needed, this is to show
+  # LD annotations
 
   if(discrete_y){
     p <- ggplot_build(out)
@@ -150,9 +167,41 @@ ggetho <- function(data,
     out <- out + geom_blank() +   geom_blank(aes(y=y), data.frame(y=mar), inherit.aes = FALSE)
   }
 
-
   if(!is.null(time_wrap))
     return( out + scale_x_FUN(limits=c(0, time_wrap)))
 
   out + scale_x_FUN()
+}
+
+auto_x_time_scale <- function(t){
+  rng <- range(as.numeric(t))
+  diff <- rng[2] - rng[1]
+  if(diff > behavr::days(3)){
+    return(scale_x_days)
+  }
+  else if(diff > behavr::hours(3)){
+    return(scale_x_hours)
+  }
+  else{
+    return(scale_x_seconds)
+  }
+}
+
+make_multiplot <- function(data, n, per, summary_time_window){
+  data[, period := floor(t/per)]
+  t_map <- data.table(t = seq(0, per* n, by=summary_time_window))
+  min_per <- data[, min(period)]
+  max_per <- data[, max(period)-(n-1)]
+  l <- lapply(min_per:max_per, function(x){
+                  o <- data[period %between% c(x,x+(n-1))]
+                  o[, t := t - per * x ]
+                  o <- na.omit(o[t_map, on="t", roll=summary_time_window, rollend=TRUE])
+                  o[, period:= x]
+                  o
+  })
+
+  out <- rbindlist(l)
+
+  out[, period := factor(period, levels = max_per:min_per)]
+  setkeyv(out, key(data))
 }

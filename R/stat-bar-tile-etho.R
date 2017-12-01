@@ -59,7 +59,7 @@ GeomBarTile <- ggproto("GeomBarTile", GeomRect,
                          transform(data,
                                    xmin = x - width / 2,  xmax = x + width / 2,  width = NULL,
                                    ymin = y - 1 / 2,
-                                   ymax = y + (1 / 2) * z_rel
+                                   ymax = y - 1/2 + z_rel
                          )
                        },
                        draw_key = draw_key_polygon

@@ -5,7 +5,8 @@
 \title{Prepare a ggplot object to represent behavioural data}
 \usage{
 ggetho(data, mapping, summary_FUN = mean, summary_time_window = mins(30),
-  time_wrap = NULL, time_offset = NULL, ...)
+  time_wrap = NULL, time_offset = NULL, multiplot = NULL,
+  multiplot_period = hours(24), ...)
 }
 \arguments{
 \item{data}{\link{behavr} table containing the data and metadata}
@@ -19,6 +20,10 @@ ggetho(data, mapping, summary_FUN = mean, summary_time_window = mins(30),
 \item{time_wrap}{time (in seconds) used to wrap the data (see details)}
 
 \item{time_offset}{time offset (i.e. phase, in seconds) when using \code{time_wrap}}
+
+\item{multiplot}{integer, greater than two, or NULL, the default (see details)}
+
+\item{multiplot_period}{the duration of the period when mutiplotting (see details)}
 
 \item{...}{additional arguments to be passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 }
@@ -36,6 +41,14 @@ In other words, it can help be used to pull all days together in one representat
 In this case, \code{time_wrap = hours(24)}.
 Instead of representing data from the start of the day, it can be done from any offset, using \code{time_offset}.
 For instance,  \code{time_offset = hours(12)} puts the circadian reference (ZT0) in the middle of the plot.
+
+Multiplots is a generalistion of double-plotting, tripple-plotting...
+This type or representation is usefull to understand periodic behaviours.
+When \code{multiplot} is not NULL, data is repeated as
+many time along the x axis to generate a double (when \code{multiplot=2}) plotted actogram
+The y axis then is the period (typically the day) onset.
+It is possible to set duration of the period, which is typically 24h to arbitrary values using the
+\code{multiplot_period} argument.
 }
 \examples{
 # We start by making a to dataset with 20 animals
@@ -61,6 +74,14 @@ pl
 # we want to summarise (wrap) data along a circadian day:
 pl <- ggetho(dt, aes(y=asleep), time_wrap=hours(24))
 pl
+
+# double ploted actogram:
+pl <- ggetho(dt,
+              aes(z=moving),
+              multiplot = 2,
+              multiplot_period = hours(24))
+pl
+# then use `+ stat_tile_etho()` , or `+ stat_bar_tile_etho()`
 }
 \seealso{
 \itemize{
