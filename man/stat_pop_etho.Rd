@@ -84,14 +84,18 @@ pl + stat_pop_etho()
 pl <-  ggetho(dt, aes(y=!moving), time_wrap=hours(24))
 pl + stat_pop_etho()
 }
+\references{
+\itemize{
+\item The relevant \href{https://rethomics.github.io/ggetho.html#population-plots}{rethomic tutorial section}
+}
+}
 \seealso{
 \itemize{
 \item \link{ggetho} to generate a plot object
 \item \link{stat_tile_etho} to show variable of interest as colour intensity
 \item \link{stat_ld_annotations} to show light and dark phases on the plot
-\item TODO Tutorial for this function
 }
 
-Other layers: \code{\link{stat_ld_annotations}},
-  \code{\link{stat_tile_etho}}
+Other layers: \code{\link{stat_bar_tile_etho}},
+  \code{\link{stat_ld_annotations}}
 }

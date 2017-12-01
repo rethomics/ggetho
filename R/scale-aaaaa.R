@@ -24,5 +24,10 @@
 #' # time wraping
 #' pl <-  ggetho(dt[t < days(2)], aes(y=asleep)) + stat_pop_etho()
 #' pl + scale_x_hours(time_wrap = hours(24))
+#' @seealso
+#' * [ggetho] to generate a plot object
+#' * [ggplot2::scale_x_continuous], the defaut ggplot scale, to understand limits, breaks, labels and name
+#' @references
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#coordinate-and-scales)
 #' @name time_scales
 NULL

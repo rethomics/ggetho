@@ -67,6 +67,8 @@ pl
 \item \link{stat_pop_etho} to show population trend by aggregating individuals over time
 \item \link{stat_tile_etho} to show variable of interest as colour intensity
 \item \link{stat_ld_annotations} to show light and dark phases on the plot
+@references
+\item The relevant \href{https://rethomics.github.io/ggetho.html#the-ggetho-function}{rethomic tutorial section}
 }
 }
 \author{

@@ -100,3 +100,14 @@ pl + scale_x_seconds(breaks = hours(1:4))
 pl <-  ggetho(dt[t < days(2)], aes(y=asleep)) + stat_pop_etho()
 pl + scale_x_hours(time_wrap = hours(24))
 }
+\references{
+\itemize{
+\item The relevant \href{https://rethomics.github.io/ggetho.html#coordinate-and-scales}{rethomic tutorial section}
+}
+}
+\seealso{
+\itemize{
+\item \link{ggetho} to generate a plot object
+\item \link[ggplot2:scale_x_continuous]{ggplot2::scale_x_continuous}, the defaut ggplot scale, to understand limits, breaks, labels and name
+}
+}

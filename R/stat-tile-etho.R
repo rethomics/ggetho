@@ -1,8 +1,8 @@
-#@include
-#' Display a behavioural variable of interest as colour intensity value
+#' Display a behavioural variable of interest as colour intensity value or bar height
 #'
-#' This function shows the temporal trend (time on the x axis) of a varible of interest as colour instensity (z axis).
-#' The y axis is a discrete variable such as a treatment or the id of animals.
+#' These function shows the temporal trend (time on the x axis) of a varible of interest (z axis)
+#' as either colour instensity (`stat_tile_etho`) or using the hight of the tiles (`stat_bar_tile_etho`).
+#' In both cases, the y axis is a discrete variable such as a treatment or the id of animals.
 #'
 #' @family layers
 #' @inheritParams ggplot2::stat_summary_2d
@@ -10,7 +10,6 @@
 #' @param method function used to compute the aggregate, when grouping individuals on the same row.
 #' The default is [mean]. [median], [min], [max] are other examples of other functions one can use.
 #' @examples
-#' library(behavr)
 #' # we start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
 #'                    age=c(1, 5, 10, 20),
@@ -35,11 +34,14 @@
 #' # Instead, of the average, maybe we want to show the highest (max)
 #' # posible value of sleep for any time point
 #' pl + stat_tile_etho(method=max)
+#' # we can also use stat_bar_tile as an alternative
+#' pl + stat_bar_tile_etho()
 #' @seealso
 #' * [ggetho] to generate a plot object
 #' * [stat_pop_etho] to show population trend by aggregating individuals over time
 #' * [stat_ld_annotations] to show light and dark phases on the plot
-#' * TODO Tutorial for this function \url{http://gilestrolab.github.io/rethomics/tutorial/todo}
+#' @references
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#tile-plots)
 #' @export
 stat_tile_etho <- function(mapping = NULL, data = NULL,
                             geom = "raster", position = "identity",
@@ -66,17 +68,8 @@ stat_tile_etho <- function(mapping = NULL, data = NULL,
 }
 
 
-StatTileEtho <- ggproto("StatTileEtho", Stat,
-                         default_aes = aes(fill = ..value..),
-                         required_aes = c("x", "y", "z"),
-                         compute_group = function(data, scales, method, method.args = list()){
-                           data <- data.table::as.data.table(data)
-                           foo <- function(z){
-                             all_args <- append(list(z), method.args)
-                             do.call(method, all_args)
-                           }
-                           out <- data[,.(value=foo(z)),by="x,y"]
-                           out
-                         }
-)
+StatTileEtho <- ggproto("StatTileEtho",
+                           StatBarTileEtho,
+                            default_aes = aes(fill = ..value..)
+                           )
 

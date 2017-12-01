@@ -26,5 +26,3 @@ test_that("ggetho works well with a variety of expressions", {
   pl <- ggetho(dt, aes(z=moving, y=paste(condition, id)))
   pl
 })
-
-

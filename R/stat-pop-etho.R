@@ -39,7 +39,8 @@
 #' * [ggetho] to generate a plot object
 #' * [stat_tile_etho] to show variable of interest as colour intensity
 #' * [stat_ld_annotations] to show light and dark phases on the plot
-#' * TODO Tutorial for this function
+#' @references
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#population-plots)
 #' @export
 stat_pop_etho <- function(mapping = NULL, data = NULL,
                           geom = "smooth", position = "identity",

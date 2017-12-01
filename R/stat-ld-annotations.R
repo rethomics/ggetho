@@ -35,9 +35,10 @@
 #' # on a tile plot:
 #' pl <-  ggetho(dt, aes(z=asleep)) + stat_tile_etho()
 #' pl + stat_ld_annotations()
-#' @seealso  Useful links:
+#' @seealso
 #' * [ggetho] to generate a plot object
-#' * TODO Tutorial for this function
+#' @references
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#ld-annotations)
 #' @export
 stat_ld_annotations <- function (mapping = NULL,
                                  data = NULL,

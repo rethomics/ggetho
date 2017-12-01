@@ -45,7 +45,8 @@
 #' * [stat_pop_etho] to show population trend by aggregating individuals over time
 #' * [stat_tile_etho] to show variable of interest as colour intensity
 #' * [stat_ld_annotations] to show light and dark phases on the plot
-# TODO * Tutorial for this function \url{http://gilestrolab.github.io/rethomics/tutorial/todo}
+#'  @references
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#the-ggetho-function)
 #' @export
 #' @author Quentin Geissmann (\email{qgeissmann@@gmail.com})
 ggetho <- function(data,
@@ -58,9 +59,8 @@ ggetho <- function(data,
                     # todo add time wrap offset / double plotting
                     ...){
 
-  if(is.null(time_wrap) & !is.null(time_offset))
-    stop("Time offset is only relevant in the context of time wrapping")
-
+  if(!is.null(time_offset))
+    stop("Not implemented") #todo
   #todo check argument types!!
 
   mapping_list <-as.list(as.character(mapping))
@@ -114,6 +114,10 @@ ggetho <- function(data,
     # todo check those columns exist
     mapping_list$y = "id"
   }
+
+
+  #mapping_list$x <-  paste0("`", mapping_list$x, "`")
+
 
   mapping_list <- lapply(mapping_list,
                          function(x){

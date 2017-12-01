@@ -89,13 +89,16 @@ pl + stat_ld_annotations(period=hours(22), phase=hours(3))
 pl <-  ggetho(dt, aes(z=asleep)) + stat_tile_etho()
 pl + stat_ld_annotations()
 }
+\references{
+\itemize{
+\item The relevant \href{https://rethomics.github.io/ggetho.html#ld-annotations}{rethomic tutorial section}
+}
+}
 \seealso{
-Useful links:
 \itemize{
 \item \link{ggetho} to generate a plot object
-\item TODO Tutorial for this function
 }
 
-Other layers: \code{\link{stat_pop_etho}},
-  \code{\link{stat_tile_etho}}
+Other layers: \code{\link{stat_bar_tile_etho}},
+  \code{\link{stat_pop_etho}}
 }
