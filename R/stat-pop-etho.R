@@ -1,4 +1,3 @@
-#@include
 #' Compute and display a population aggregate for a behavioural variable of interest
 #'
 #' This function displays the temporal (time on the x axis) trend of variable of interest,
@@ -10,7 +9,7 @@
 #' @param method function used to compute the aggregate and error bars.
 #' It should return (`y`, `ymin` and `ymax`).
 #' The default is [ggplot2::mean_se], which computes the mean + or - standard error.
-#' [boot_ci] can be used instead to generate bootstrap confidence interval.
+#' [ggplot2::mean_cl_boot] can be used instead to generate bootstrap confidence interval.
 #' @examples
 #' library(behavr)
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
@@ -39,6 +38,7 @@
 #' * [ggetho] to generate a plot object
 #' * [stat_tile_etho] to show variable of interest as colour intensity
 #' * [stat_ld_annotations] to show light and dark phases on the plot
+#' * [ggplot2::stat_smooth] to understand how to change the type of error bars etc
 #' @references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#population-plots)
 #' @export
@@ -82,24 +82,4 @@ StatPopEtho <- ggplot2::ggproto("StatPopEtho", ggplot2::Stat,
 )
 
 
-#' Bootstrap confidence interval
-#'
-#' Compute the mean of a variable, and the quantiles after bootstrap resampling.
-#'
-#' @param y Numeric vector
-#' @param r Number of replicates to draw.
-#' @param ci Confidence interval to draw from the empirical distribution.
-#' @seealso `boot_ci` is intended to be used as the `method` argument of [stat_pop_etho].
-#' Other functions, such as  [ggplot2::mean_se], can be used to generate error bars.
-#' @export
-boot_ci <- function(y,
-                   r=5000,
-                   ci=0.95){
-  v <- replicate(r, mean(sample(y,replace=T)))
-  ci <- quantile(v,c(1-ci,ci))
-  out <-list(y = mean(y),
-             ymin = ci[1],
-             ymax = ci[2])
-  out
-}
 

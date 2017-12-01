@@ -41,7 +41,7 @@ to the paired geom/stat.}
 \item{method}{function used to compute the aggregate and error bars.
 It should return (\code{y}, \code{ymin} and \code{ymax}).
 The default is \link[ggplot2:mean_se]{ggplot2::mean_se}, which computes the mean + or - standard error.
-\link{boot_ci} can be used instead to generate bootstrap confidence interval.}
+\link[ggplot2:mean_cl_boot]{ggplot2::mean_cl_boot} can be used instead to generate bootstrap confidence interval.}
 
 \item{method.args}{List of additional arguments passed on to the modelling
 function defined by \code{method}.}
@@ -94,6 +94,7 @@ pl + stat_pop_etho()
 \item \link{ggetho} to generate a plot object
 \item \link{stat_tile_etho} to show variable of interest as colour intensity
 \item \link{stat_ld_annotations} to show light and dark phases on the plot
+\item \link[ggplot2:stat_smooth]{ggplot2::stat_smooth} to understand how to change the type of error bars etc
 }
 
 Other layers: \code{\link{stat_bar_tile_etho}},

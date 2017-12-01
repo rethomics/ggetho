@@ -71,6 +71,3 @@ pl
 \item The relevant \href{https://rethomics.github.io/ggetho.html#the-ggetho-function}{rethomic tutorial section}
 }
 }
-\author{
-Quentin Geissmann (\email{qgeissmann@gmail.com})
-}

@@ -48,7 +48,6 @@
 #'  @references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#the-ggetho-function)
 #' @export
-#' @author Quentin Geissmann (\email{qgeissmann@@gmail.com})
 ggetho <- function(data,
                     mapping,
                     summary_FUN = mean,
