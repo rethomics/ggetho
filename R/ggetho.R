@@ -71,16 +71,18 @@ ggetho <- function(data,
                     mapping,
                     summary_FUN = mean,
                     summary_time_window = mins(30),
-                    #time_conversion=hours,
                     time_wrap=NULL,
-                    time_offset=NULL,
-                    # todo add time wrap offset / double plotting
+                    time_offset=0,
                     multiplot=NULL, # 1
                     multiplot_period= hours(24),
                     ...){
 
-  if(!is.null(time_offset))
-    stop("Not implemented") #todo
+  if(time_offset != 0 & is.null(time_wrap))
+    warning("Time offset only relevant when using time_wrap.
+             Ignoring argument")
+  else
+    time_offset <- time_offset %% time_wrap
+
   #todo check argument types!!
   if(!is.null(multiplot)){
   if(!is.null(time_wrap))
@@ -144,6 +146,15 @@ ggetho <- function(data,
     discrete_y <- TRUE
   }
 
+  if(!is.null(time_wrap)){
+    sdt[, x_off := eval(parse(text = x_name)) ]
+    sdt[, x_off := ((x_off + time_offset) %% time_wrap ) - time_offset]
+    sdt[, x_name] <- sdt[, x_off]
+    sdt[, x_off := NULL]
+  }
+    #sdt[,,.SD,keyby=c("id", "x_name")]
+
+
   scale_x_FUN <- auto_x_time_scale(sdt[[mapping_list$x]])
   mapping_list <- lapply(mapping_list,
                          function(x){
@@ -168,10 +179,13 @@ ggetho <- function(data,
   }
 
   if(!is.null(time_wrap))
-    return( out + scale_x_FUN(limits=c(0, time_wrap)))
+    return( out + scale_x_FUN(limits=c(- time_offset, time_wrap- time_offset)))
 
   out + scale_x_FUN()
 }
+
+
+
 
 auto_x_time_scale <- function(t){
   rng <- range(as.numeric(t))

@@ -5,7 +5,7 @@
 \title{Prepare a ggplot object to represent behavioural data}
 \usage{
 ggetho(data, mapping, summary_FUN = mean, summary_time_window = mins(30),
-  time_wrap = NULL, time_offset = NULL, multiplot = NULL,
+  time_wrap = NULL, time_offset = 0, multiplot = NULL,
   multiplot_period = hours(24), ...)
 }
 \arguments{
