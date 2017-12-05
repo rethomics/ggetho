@@ -76,7 +76,7 @@ test_that("ggetho's time_offset works", {
   pl_c <- ggetho(dt, aes(y=moving), time_wrap=hours(24), time_offset = hours(6)) + my_layers
   pl_d <- ggetho(dt, aes(y=moving), time_wrap=hours(24), time_offset = hours(-6)) + my_layers
 
-  cowplot::plot_grid(pl_a,pl_b,pl_c,pl_d, labels=letters[1:4])
+  #cowplot::plot_grid(pl_a,pl_b,pl_c,pl_d, labels=letters[1:4])
 
   expect_warning(ggetho(dt, aes(y=moving), time_offset = 1),
                  "Time offset only relevant when using time_wrap")
