@@ -1,7 +1,8 @@
 #' Scales for durations
 #'
 #' Scales used to represent behaviour durations
-#' @param time_wrap duration (in seconds) used to wrap the lanbels of the time axis.
+#' @param time_wrap duration (in seconds) used to wrap the labels of the time axis
+#' @param unit the unit to be use in the label (e.g. `"second"` instead of `"s"`)
 #' @details `time_wrap` is useful when for instance wanting to express time within a day (ZT).
 #' @inheritParams ggplot2::scale_x_time
 #' @examples

@@ -8,20 +8,20 @@
 \alias{scale_x_seconds}
 \title{Scales for durations}
 \usage{
-scale_x_days(name = "Time (day)", breaks = waiver(),
-  minor_breaks = waiver(), labels = waiver(), limits = NULL,
-  expand = waiver(), oob = scales::censor, na.value = NA_real_,
-  position = "bottom", time_wrap = NULL)
+scale_x_days(name = "Time", breaks = waiver(), minor_breaks = waiver(),
+  labels = waiver(), limits = NULL, expand = waiver(),
+  oob = scales::censor, na.value = NA_real_, position = "bottom",
+  time_wrap = NULL, unit = "day")
 
-scale_x_hours(name = "Time (h)", breaks = waiver(),
-  minor_breaks = waiver(), labels = waiver(), limits = NULL,
-  expand = waiver(), oob = scales::censor, na.value = NA_real_,
-  position = "bottom", time_wrap = NULL)
+scale_x_hours(name = "Time", breaks = waiver(), minor_breaks = waiver(),
+  labels = waiver(), limits = NULL, expand = waiver(),
+  oob = scales::censor, na.value = NA_real_, position = "bottom",
+  time_wrap = NULL, unit = "h")
 
-scale_x_seconds(name = "Time (s)", breaks = waiver(),
-  minor_breaks = waiver(), labels = waiver(), limits = NULL,
-  expand = waiver(), oob = scales::censor, na.value = NA_real_,
-  position = "bottom", time_wrap = NULL)
+scale_x_seconds(name = "Time", breaks = waiver(), minor_breaks = waiver(),
+  labels = waiver(), limits = NULL, expand = waiver(),
+  oob = scales::censor, na.value = NA_real_, position = "bottom",
+  time_wrap = NULL, unit = "s")
 }
 \arguments{
 \item{name}{The name of the scale. Used as axis or legend title. If
@@ -71,7 +71,9 @@ discrete variables.}
 \item{position}{The position of the axis. "left" or "right" for vertical
 scales, "top" or "bottom" for horizontal scales}
 
-\item{time_wrap}{duration (in seconds) used to wrap the lanbels of the time axis.}
+\item{time_wrap}{duration (in seconds) used to wrap the labels of the time axis}
+
+\item{unit}{the unit to be use in the label (e.g. \code{"second"} instead of \code{"s"})}
 }
 \description{
 Scales used to represent behaviour durations

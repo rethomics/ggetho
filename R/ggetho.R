@@ -2,7 +2,7 @@
 #'
 #' This function summarises a variable of interest (y or z axis)
 #' in order to subsequently represent it over time (x axis)
-#' (either using `ggplot2` or the of plotting functions provided in `ggetho``).
+#' (either using `ggplot2` or the of plotting functions provided in `ggetho`).
 #'
 #' @param data [behavr] table containing the data and metadata
 #' @param mapping default list of aesthetic mappings to use for plot
@@ -97,7 +97,7 @@ ggetho <- function(data,
   has_colour = "colour" %in% aes_names
   has_fill = "fill" %in% aes_names
 
-  # if has only colour Xor fill deffined
+  # if has only colour Xor fill defined
   if( xor(has_fill, has_colour)){
      col = c(mapping_list$fill, mapping_list$colour)[[1]]
      mapping_list$fill <- col

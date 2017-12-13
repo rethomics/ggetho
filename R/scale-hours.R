@@ -1,6 +1,6 @@
 #' @rdname time_scales
 #' @export
-scale_x_hours <- function(name = "Time (h)",
+scale_x_hours <- function(name = "Time",
                           breaks = waiver(),
                           minor_breaks = waiver(),
                           labels = waiver(),
@@ -9,8 +9,9 @@ scale_x_hours <- function(name = "Time (h)",
                           oob = scales::censor,
                           na.value = NA_real_,
                           position = "bottom",
-                          time_wrap = NULL) {
-
+                          time_wrap = NULL,
+                          unit="h") {
+  name <- sprintf("%s (%s)", name, unit)
   scale_x_continuous(
     name = name,
     breaks = breaks,

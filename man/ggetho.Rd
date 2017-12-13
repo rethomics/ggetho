@@ -33,7 +33,7 @@ an initial plot object that can be further edited.
 \description{
 This function summarises a variable of interest (y or z axis)
 in order to subsequently represent it over time (x axis)
-(either using \code{ggplot2} or the of plotting functions provided in `ggetho``).
+(either using \code{ggplot2} or the of plotting functions provided in \code{ggetho}).
 }
 \details{
 \code{time_wrap} is typically used to express time relatively to the start of the the day.
