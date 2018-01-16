@@ -106,6 +106,7 @@ pl + stat_bar_tile_etho()
 \item \link{stat_ld_annotations} to show light and dark phases on the plot
 }
 
-Other layers: \code{\link{stat_ld_annotations}},
+Other layers: \code{\link{geom_peak}},
+  \code{\link{stat_ld_annotations}},
   \code{\link{stat_pop_etho}}
 }

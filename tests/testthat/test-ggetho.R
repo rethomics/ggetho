@@ -1,4 +1,4 @@
-context("ggteho")
+context("ggetho")
 
 test_that("ggetho works well with a variety of expressions", {
   metadata <- data.table(id= sprintf("toy_experiment|%02d", 1:20),

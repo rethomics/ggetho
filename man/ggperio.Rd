@@ -14,22 +14,39 @@ ggperio(data, mapping = aes(x = period, y = power), ...)
 \item{...}{additional arguments to be passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 }
 \description{
-TODO
+Represents spectral data, showing period on the \code{x} axis, and power (or equivalent) on the \code{y} axis.
 }
 \examples{
 \dontrun{
 library(zeitgebr)
+# We make toy data
 metadata <- data.table(id=sprintf("toy_experiment|\%02d" , 1:40), region_id=1:40,
                        condition=c("A","B"),
                        sex=c("M","M", "F", "F"))
 dt <- toy_activity_data(metadata, seed=107)
+# We shift period of the group "A" by 0.01
 dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]
+# We  compute a periodogram for each individual
 per_dt <- periodogram(moving, dt, FUN = chi_sq_periodogram)
+
+# Then we display them as an average
 out <- ggperio(per_dt, aes(y=power, colour=condition))
 out +  stat_pop_etho()
+
 out <- ggperio(per_dt, aes(y=power - signif_threshold, colour=condition))
 out +  stat_pop_etho()
 out <- ggperio(per_dt, aes(y=power - signif_threshold, colour=condition))
 out +  stat_pop_etho() + facet_wrap( ~ id, labeller = id_labeller)
+}
+}
+\references{
+\itemize{
+\item The relevant \href{https://rethomics.github.io/ggetho.html#population-plots}{rethomic tutorial section} TODO
+}
+}
+\seealso{
+\itemize{
+\item \link{ggetho} to plot time series
+\item \link{geom_peak} to draw peaks on a periodogram
 }
 }

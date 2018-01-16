@@ -97,6 +97,7 @@ pl + stat_pop_etho()
 \item \link[ggplot2:stat_smooth]{ggplot2::stat_smooth} to understand how to change the type of error bars etc
 }
 
-Other layers: \code{\link{stat_bar_tile_etho}},
+Other layers: \code{\link{geom_peak}},
+  \code{\link{stat_bar_tile_etho}},
   \code{\link{stat_ld_annotations}}
 }

@@ -99,6 +99,7 @@ pl + stat_ld_annotations()
 \item \link{ggetho} to generate a plot object
 }
 
-Other layers: \code{\link{stat_bar_tile_etho}},
+Other layers: \code{\link{geom_peak}},
+  \code{\link{stat_bar_tile_etho}},
   \code{\link{stat_pop_etho}}
 }

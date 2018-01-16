@@ -1,4 +1,4 @@
-context("sclales")
+context("scales")
 
 test_that("scales work", {
 
