@@ -4,8 +4,11 @@
 \name{time_scales}
 \alias{time_scales}
 \alias{scale_x_days}
+\alias{scale_y_days}
 \alias{scale_x_hours}
+\alias{scale_y_hours}
 \alias{scale_x_seconds}
+\alias{scale_y_seconds}
 \title{Scales for durations}
 \usage{
 scale_x_days(name = "Time", breaks = waiver(), minor_breaks = waiver(),
@@ -13,14 +16,29 @@ scale_x_days(name = "Time", breaks = waiver(), minor_breaks = waiver(),
   oob = scales::censor, na.value = NA_real_, position = "bottom",
   time_wrap = NULL, unit = "day")
 
+scale_y_days(name = "Time", breaks = waiver(), minor_breaks = waiver(),
+  labels = waiver(), limits = NULL, expand = waiver(),
+  oob = scales::censor, na.value = NA_real_, position = "left",
+  time_wrap = NULL, unit = "day")
+
 scale_x_hours(name = "Time", breaks = waiver(), minor_breaks = waiver(),
   labels = waiver(), limits = NULL, expand = waiver(),
   oob = scales::censor, na.value = NA_real_, position = "bottom",
   time_wrap = NULL, unit = "h")
 
+scale_y_hours(name = "Time", breaks = waiver(), minor_breaks = waiver(),
+  labels = waiver(), limits = NULL, expand = waiver(),
+  oob = scales::censor, na.value = NA_real_, position = "left",
+  time_wrap = NULL, unit = "h")
+
 scale_x_seconds(name = "Time", breaks = waiver(), minor_breaks = waiver(),
   labels = waiver(), limits = NULL, expand = waiver(),
   oob = scales::censor, na.value = NA_real_, position = "bottom",
+  time_wrap = NULL, unit = "s")
+
+scale_y_seconds(name = "Time", breaks = waiver(), minor_breaks = waiver(),
+  labels = waiver(), limits = NULL, expand = waiver(),
+  oob = scales::censor, na.value = NA_real_, position = "left",
   time_wrap = NULL, unit = "s")
 }
 \arguments{

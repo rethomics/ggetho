@@ -26,6 +26,35 @@ scale_x_hours <- function(name = "Time",
   )
 }
 
+#' @rdname time_scales
+#' @export
+scale_y_hours <- function(name = "Time",
+                          breaks = waiver(),
+                          minor_breaks = waiver(),
+                          labels = waiver(),
+                          limits = NULL,
+                          expand = waiver(),
+                          oob = scales::censor,
+                          na.value = NA_real_,
+                          position = "left",
+                          time_wrap = NULL,
+                          unit="h") {
+  name <- sprintf("%s (%s)", name, unit)
+  scale_y_continuous(
+    name = name,
+    breaks = breaks,
+    labels = labels,
+    minor_breaks = minor_breaks,
+    limits = limits,
+    expand = expand,
+    oob = oob,
+    na.value = na.value,
+    position = position,
+    trans = hours_trans(time_wrap)
+  )
+}
+
+
 hours_trans <- function(time_wrap  = NULL) {
   if(is.null(time_wrap))
     formater <- function(x)format(as.numeric(x) / 3600)

@@ -38,3 +38,20 @@ test_that("scales work", {
   dtr$breaks(five_day * 6)
 
 })
+
+
+context("scales")
+
+test_that("scales work", {
+
+  df <- data.frame(y=rnorm(1000), t=1:1000 * 10)
+  ggplot(df, aes(t, y)) + scale_x_days()
+  ggplot(df, aes(t, y)) + scale_x_hours()
+  ggplot(df, aes(t, y)) + scale_x_seconds()
+
+  ggplot(df, aes(y,t)) + scale_y_days()
+  ggplot(df, aes(y,t)) + scale_y_hours()
+  ggplot(df, aes(y,t)) + scale_y_seconds()
+
+})
+
