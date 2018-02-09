@@ -60,7 +60,7 @@ The default, \code{hours} will convert x (time) from seconds to hours.}
 This function draws a point on the x-y coordinates of peaks and write their (y) value in the bottom of the plot.
 }
 \details{
-Peaks are encoded as an additional column/aestetic with values corresponding to peak rank (and \code{NA} when the point is not a peak).
+Peaks are encoded as an additional column/aestetic with values corresponding to peak rank (and \code{0} when the point is not a peak).
 In other word, the mapping must provide \code{x}, \code{y} and \code{peak}. Only peaks matching \code{peak_rank} will be drawn (see example).
 }
 \examples{
