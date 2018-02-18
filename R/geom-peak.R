@@ -7,9 +7,9 @@
 #' @inheritParams ggplot2::geom_point
 #' @param peak_rank numerical vector specifying the rank(s) of peak(s) to draw
 #' @param conversion a function to convert values of `x` before writing.
-#' The default, `hours` will convert x (time) from seconds to hours.
+#' The default, `hours`, will convert x (time) from seconds to hours.
 #' @details
-#' Peaks are encoded as an additional column/aestetic with values corresponding to peak rank (and `NA` when the point is not a peak).
+#' Peaks are encoded as an additional column/aesthetic with values corresponding to peak rank (and `NA` when the point is not a peak).
 #' In other word, the mapping must provide `x`, `y` and `peak`. Only peaks matching `peak_rank` will be drawn (see example).
 #' @examples
 #' # We make a data frame by hand with five rows
