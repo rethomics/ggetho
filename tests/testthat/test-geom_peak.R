@@ -15,4 +15,8 @@ test_that("geom_peak works", {
     facet_wrap( ~ id, labeller = id_labeller)+
    geom_peak(colour="black")
   out
+
+
+  print(out)
+  testthat::expect_is(out$layers[[1]], "ggproto")
 })

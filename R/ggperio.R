@@ -42,9 +42,8 @@ ggperio <- function(data,
     mapping_list$x = "period"
   if(!"y" %in% aes_names)
     mapping_list$y = "power"
-  if(!"peak" %in% aes_names)
+  if(!"peak" %in% aes_names & "peak" %in% colnames(data))
     mapping_list$peak = "peak"
-
   has_colour = "colour" %in% aes_names
   has_fill = "fill" %in% aes_names
 

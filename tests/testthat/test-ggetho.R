@@ -5,26 +5,25 @@ test_that("ggetho works well with a variety of expressions", {
                     condition=c("A","B"))
   dt <- toy_activity_data(metadata, 3)
   pl <- ggetho(dt, aes(y=moving))
-  pl
+  testthat::expect_is(pl, "ggplot")
   pl <- ggetho(dt, aes(y=1-moving ))
-  pl
+  testthat::expect_is(pl, "ggplot")
   pl <- ggetho(dt, aes(y=!moving ))
-  pl
-
+  testthat::expect_is(pl, "ggplot")
 
   pl <- ggetho(dt, aes(z=moving))
-  pl
+  testthat::expect_is(pl, "ggplot")
   pl <- ggetho(dt, aes(z=1-moving ))
-  pl
+  testthat::expect_is(pl, "ggplot")
   pl <- ggetho(dt, aes(z=!moving ))
-  pl
+  testthat::expect_is(pl, "ggplot")
 
   # sorting with paste
   pl <- ggetho(dt, aes(z=moving,y=paste(condition, id)))
-  pl
+  testthat::expect_is(pl, "ggplot")
 
   pl <- ggetho(dt, aes(z=moving, y=paste(condition, id)))
-  pl
+  testthat::expect_is(pl, "ggplot")
 })
 
 
