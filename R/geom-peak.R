@@ -9,7 +9,8 @@
 #' @param conversion a function to convert values of `x` before writing.
 #' The default, `hours`, will convert x (time) from seconds to hours.
 #' @details
-#' Peaks are encoded as an additional column/aesthetic with values corresponding to peak rank (and `NA` when the point is not a peak).
+#' Peaks are encoded as an additional column/aesthetic with values
+#'corresponding to peak rank (and `0` when the point is not a peak).
 #' In other word, the mapping must provide `x`, `y` and `peak`. Only peaks matching `peak_rank` will be drawn (see example).
 #' @examples
 #' # We make a data frame by hand with five rows
@@ -39,16 +40,17 @@
 #' \dontrun{
 #' library(zeitgebr)
 #' # We make toy data
-#' metadata <- data.table(id=sprintf("toy_experiment|%02d" , 1:40), region_id=1:40,
-#'                        condition=c("A","B"),
-#'                        sex=c("M","M", "F", "F"))
-#' dt <- toy_activity_data(metadata, seed=107)
+#' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:40),
+#'                        region_id = 1:40,
+#'                        condition = c("A", "B"),
+#'                        sex = c("M","M", "F", "F"))
+#' dt <- toy_activity_data(metadata, seed = 107)
 #' # We shift period of the group "A" by 0.01
 #' dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]
 #' # We  compute a periodogram for each individual
 #' per_dt <- periodogram(moving, dt, FUN = chi_sq_periodogram)
 #' per_dt <- find_peaks(per_dt)
-#' out <- ggperio(per_dt, aes(y=power - signif_threshold, colour=condition, peak=peak)) +
+#' out <- ggperio(per_dt, aes(y = power - signif_threshold, colour = condition, peak = peak)) +
 #'                     stat_pop_etho() +
 #'                     facet_wrap( ~ id, labeller = id_labeller)
 #' out
@@ -58,7 +60,7 @@
 #' * [ggperio] to create a periodogram
 #' * [zeitgebr::find_peaks] to add a `peak` column on a periodogram
 #' @references
-#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#population-plots) TODO
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#periodograms)
 #' @export
 geom_peak <- function(mapping = NULL, data = NULL,
                       stat = "identity", position = "identity",
