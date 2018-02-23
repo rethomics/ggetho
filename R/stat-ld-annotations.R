@@ -5,35 +5,37 @@
 #' @family layers
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_rect
-#' @param ld_colours character vector of length 2 naming the colours for light and dark phases, respectively.
-#' The default is white and black.
-#' @param ypos position and height of the annotation on the y axis. It can be either `"top"` of `"bottom"`.
+#' @param ld_colours character vector of length two naming
+#' the colours for light and dark phases, respectively.
+#' The default is `c("white", "black")`.
+#' @param ypos position and height of the annotation on the y axis.
+#' It can be either `"top"` of `"bottom"`.
 #' The default, `"bottom"` will put the labels below any data.
 #' @param height relative height of the rectangles. The default is 3 percent (0.03).
 #' @param outline colour of the border of the rectangles. `NA` means no border.
 #' @param x_limits numerical vector of length 2 for the start and end of the annotations (in seconds).
-#' The default, `NA`, uses the full range of the plotted data.
+#' The default, `c(NA, NA)`, uses the full range of the plotted data.
 #' @param period,phase period and phase (in seconds) of the LD cycle.
 #' @examples
 #' library(behavr)
 #' # we start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
-#'                    condition=c("A","B"))
-#' dt <- toy_activity_data(metadata,3)
+#'                    condition = c("A","B"))
+#' dt <- toy_activity_data(metadata, 3)
 #' # We build a plot object
-#' pl <-  ggetho(dt, aes(y=asleep)) + stat_pop_etho()
+#' pl <-  ggetho(dt, aes(y = asleep)) + stat_pop_etho()
 #' pl + stat_ld_annotations()
 #' # We can also put the annotations in the background:
-#' pl <-  ggetho(dt, aes(y=asleep)) +
-#'                  stat_ld_annotations(outline=NA) +
+#' pl <-  ggetho(dt, aes(y = asleep)) +
+#'                  stat_ld_annotations(outline = NA) +
 #'                  stat_pop_etho()
 #' pl
 #' # different colours (e.g. DD)
-#' pl + stat_ld_annotations(ld_colour=c("grey", "black"))
+#' pl + stat_ld_annotations(ld_colour = c("grey", "black"))
 #' # shorter period
-#' pl + stat_ld_annotations(period=hours(22), phase=hours(3))
+#' pl + stat_ld_annotations(period = hours(22), phase = hours(3))
 #' # on a tile plot:
-#' pl <-  ggetho(dt, aes(z=asleep)) + stat_tile_etho()
+#' pl <-  ggetho(dt, aes(z = asleep)) + stat_tile_etho()
 #' pl + stat_ld_annotations()
 #' @seealso
 #' * [ggetho] to generate a plot object
@@ -49,7 +51,7 @@ stat_ld_annotations <- function (mapping = NULL,
                                  period = hours(24),
                                  phase = 0,
                                  outline = "black",
-                                 x_limits=NA,
+                                 x_limits = c(NA, NA),
                                  ...,
                                  na.rm = FALSE,
                                  show.legend = FALSE,
@@ -66,12 +68,20 @@ StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
                             default_aes = ggplot2::aes(colour = "black", size = 0.5, linetype = 1,
                                               alpha = .67),
                             setup_params = function(data, params){
-                              if(any(is.na(params$x_limits)))
-                                 x <- data$x
-                              else
-                                x <- params$x_limits
+                              if(length(params$x_limits) != 2 ){
+                                stop("`x_limits` should be of length 2")
+                              }
 
-                              out <- ldAnnotation(x,params$period,params$phase)
+
+                              default_limits <- c(min(data$x), max(data$x))
+                              x <- ifelse(is.na(params$x_limits), default_limits, params$x_limits)
+
+
+                              if(diff(x) <=0 ){
+                                stop("x limits are not in order: `x_limits[1] >= x_limits[2]`")
+                              }
+
+                              out <- ldAnnotation(x, params$period, params$phase)
                               params$ld_boxes <-out
                               params
                             },
