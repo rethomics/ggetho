@@ -1,17 +1,19 @@
 #' Visualise peaks within a spectrum/ distribution
 #'
-#' This function draws a point on the x-y coordinates of peaks and write their (y) value in the bottom of the plot.
+#' This function draws point on the x-y coordinates of peaks and write their (y) value on the bottom of the plot.
 #'
 #' @family layers
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @param peak_rank numerical vector specifying the rank(s) of peak(s) to draw
-#' @param conversion a function to convert values of `x` before writing.
+#' @param conversion function to convert values of `x` before writing.
 #' The default, `hours`, will convert x (time) from seconds to hours.
 #' @details
 #' Peaks are encoded as an additional column/aesthetic with values
-#'corresponding to peak rank (and `0` when the point is not a peak).
-#' In other word, the mapping must provide `x`, `y` and `peak`. Only peaks matching `peak_rank` will be drawn (see example).
+#' corresponding to peak rank (and `0` when the point is not a peak).
+#' In other word, the mapping must provide `x`, `y` and `peak`.
+#' Only peaks matching `peak_rank` will be drawn (see example).
+#'
 #' @examples
 #' # We make a data frame by hand with five rows
 #' # There are two peaks: in position 4 and 2
@@ -33,7 +35,7 @@
 #' pl + geom_peak(peak_rank = 2)
 #'
 #' # Just like with other geoms,
-#' # we can change things like colour, size, alpha, shape, ... :
+#' # we can change colour, size, alpha, shape, ... :
 #' pl + geom_peak(colour = "red", size=10, alpha=.5, shape=20)
 #'
 #' ## With zeitgebr library:
@@ -119,7 +121,7 @@ GeomPeak <- ggproto("GeomPeak", GeomPoint,
                         grid::textGrob(
                           label,
                           coords$x,
-                          unit(0, "npc"),
+                          unit(0.05, "npc"),
                           hjust = data$hjust, vjust = data$vjust,
                           rot = data$angle,
                           gp = grid::gpar(
