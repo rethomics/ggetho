@@ -20,9 +20,9 @@
 #'
 #' df <- data.frame(x = hours(1:5),
 #'                  y = c(1,2,0,4,1),
-#'                  peak= c(0,2,0,1,0))
+#'                  peak = c(0,2,0,1,0))
 #'#  We draw the plot as a line
-#' pl <-  ggplot(df, aes(x,y, peak=peak)) +
+#' pl <-  ggplot(df, aes(x, y, peak = peak)) +
 #'                   geom_line() +
 #'                   scale_x_hours()
 #' pl
@@ -36,7 +36,7 @@
 #'
 #' # Just like with other geoms,
 #' # we can change colour, size, alpha, shape, ... :
-#' pl + geom_peak(colour = "red", size=10, alpha=.5, shape=20)
+#' pl + geom_peak(colour = "red", size = 10, alpha = .5, shape = 20)
 #'
 #' ## With zeitgebr library:
 #' \dontrun{
@@ -45,7 +45,7 @@
 #' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:40),
 #'                        region_id = 1:40,
 #'                        condition = c("A", "B"),
-#'                        sex = c("M","M", "F", "F"))
+#'                        sex = c("M", "M", "F", "F"))
 #' dt <- toy_activity_data(metadata, seed = 107)
 #' # We shift period of the group "A" by 0.01
 #' dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]
