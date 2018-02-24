@@ -53,16 +53,17 @@ the default plot specification, e.g. \code{\link{borders}}.}
 
 \item{peak_rank}{numerical vector specifying the rank(s) of peak(s) to draw}
 
-\item{conversion}{a function to convert values of \code{x} before writing.
+\item{conversion}{function to convert values of \code{x} before writing.
 The default, \code{hours}, will convert x (time) from seconds to hours.}
 }
 \description{
-This function draws a point on the x-y coordinates of peaks and write their (y) value in the bottom of the plot.
+This function draws point on the x-y coordinates of peaks and write their (y) value on the bottom of the plot.
 }
 \details{
 Peaks are encoded as an additional column/aesthetic with values
 corresponding to peak rank (and \code{0} when the point is not a peak).
-In other word, the mapping must provide \code{x}, \code{y} and \code{peak}. Only peaks matching \code{peak_rank} will be drawn (see example).
+In other word, the mapping must provide \code{x}, \code{y} and \code{peak}.
+Only peaks matching \code{peak_rank} will be drawn (see example).
 }
 \examples{
 # We make a data frame by hand with five rows
@@ -70,9 +71,9 @@ In other word, the mapping must provide \code{x}, \code{y} and \code{peak}. Only
 
 df <- data.frame(x = hours(1:5),
                  y = c(1,2,0,4,1),
-                 peak= c(0,2,0,1,0))
+                 peak = c(0,2,0,1,0))
 #  We draw the plot as a line
-pl <-  ggplot(df, aes(x,y, peak=peak)) +
+pl <-  ggplot(df, aes(x, y, peak = peak)) +
                   geom_line() +
                   scale_x_hours()
 pl
@@ -85,8 +86,8 @@ pl + geom_peak(peak_rank = 1:2)
 pl + geom_peak(peak_rank = 2)
 
 # Just like with other geoms,
-# we can change things like colour, size, alpha, shape, ... :
-pl + geom_peak(colour = "red", size=10, alpha=.5, shape=20)
+# we can change colour, size, alpha, shape, ... :
+pl + geom_peak(colour = "red", size = 10, alpha = .5, shape = 20)
 
 ## With zeitgebr library:
 \dontrun{
@@ -95,7 +96,7 @@ library(zeitgebr)
 metadata <- data.table(id = sprintf("toy_experiment|\%02d", 1:40),
                        region_id = 1:40,
                        condition = c("A", "B"),
-                       sex = c("M","M", "F", "F"))
+                       sex = c("M", "M", "F", "F"))
 dt <- toy_activity_data(metadata, seed = 107)
 # We shift period of the group "A" by 0.01
 dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]

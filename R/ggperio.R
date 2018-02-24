@@ -33,7 +33,7 @@
 #' * [geom_peak] to draw peaks on a periodogram
 #' * [zeitgebr::periodogram] to compute periodograms in a first place
 #' @references
-#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#population-plots) TODO
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#periodograms)
 #' @export
 ggperio <- function(data,
                     mapping = aes(x = period, y = power),
