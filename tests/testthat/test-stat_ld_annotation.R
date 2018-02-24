@@ -39,3 +39,44 @@ test_that("annotations work with unbound limits", {
   pl <- ggetho(dt, aes(t,x)) + stat_ld_annotations(x_limits = c(days(10), days(3.4))) + geom_point()
   testthat::expect_error(print(pl), "limits are not in order")
 })
+
+
+
+
+#
+# library(ggetho)
+# metadata <- data.table(id=sprintf("toy_experiment|%02d" , 1:40), region_id=1:40,
+#                        condition=c("A","B"),
+#                        sex=c("M","M", "F", "F"))
+# head(metadata)
+#
+# dt <- toy_activity_data(metadata, seed=107)
+#
+# pl <- ggetho(dt, aes(x=t, y=moving)) +
+#   stat_ld_annotations(phase = hours(-16)) +
+#   stat_pop_etho()
+# pl
+#
+# pl <- ggetho(dt, aes(x=t, y=moving)) +
+#   stat_ld_annotations(phase = hours(0)) +
+#   stat_pop_etho()
+# pl
+#
+#
+# pl <- ggetho(dt, aes(x=t, y=moving)) +
+#   stat_ld_annotations(phase = hours(-1)) +
+#   stat_pop_etho()
+# pl
+#
+#
+# pl <- ggetho(dt, aes(x=t, y=moving)) +
+#   stat_ld_annotations(phase = hours(+1)) +
+#   stat_pop_etho()
+# pl
+#
+#
+# pl <- ggetho(dt, aes(x=t, y=moving)) +
+#   stat_ld_annotations(l_duration = hours(16)) +
+#   stat_pop_etho()
+# pl
+#
