@@ -9,7 +9,7 @@ ggetho(data, mapping, summary_FUN = mean, summary_time_window = mins(30),
   multiplot_period = hours(24), ...)
 }
 \arguments{
-\item{data}{\link{behavr} table containing the data and metadata}
+\item{data}{\link[behavr:behavr]{behavr::behavr} table containing the data and metadata}
 
 \item{mapping}{default list of aesthetic mappings to use for plot}
 
@@ -33,7 +33,7 @@ an initial plot object that can be further edited.
 \description{
 This function summarises a variable of interest (y or z axis)
 in order to subsequently represent it over time (x axis)
-(either using \code{ggplot2} or the of plotting functions provided in \code{ggetho}).
+(using layers provided either by \code{ggplot2} or \code{ggetho}).
 }
 \details{
 \code{time_wrap} is typically used to express time relatively to the start of the the day.
@@ -43,52 +43,55 @@ Instead of representing data from the start of the day, it can be done from any 
 For instance,  \code{time_offset = hours(12)} puts the circadian reference (ZT0) in the middle of the plot.
 
 Multiplots is a generalistion of double-plotting, tripple-plotting...
-This type or representation is usefull to understand periodic behaviours.
-When \code{multiplot} is not NULL, data is repeated as
-many time along the x axis to generate a double (when \code{multiplot=2}) plotted actogram
-The y axis then is the period (typically the day) onset.
+This type or representation is useful to understand periodic behaviours.
+When \code{multiplot} is \emph{not} NULL, data is repeated as
+many time as its value along the x axis to generate a double (when \code{multiplot = 2}) plotted actogram.
+The y axis is then the period (typically the day) onset.
 It is possible to set duration of the period, which is typically 24h to arbitrary values using the
 \code{multiplot_period} argument.
 }
 \examples{
-# We start by making a to dataset with 20 animals
-metadata <- data.table(id= sprintf("toy_experiment|\%02d", 1:20),
-                   condition=c("A","B"))
+# We start by making a dataset with 20 animals
+metadata <- data.table(id = sprintf("toy_experiment|\%02d", 1:20),
+                   condition = c("A", "B"))
 dt <- toy_activity_data(metadata, 3)
 # We build a plot object with **nothing inside** (just the axis)
 # we want to show proportion of time sleeping  on the y axis:
-pl <- ggetho(dt, aes(y=asleep))
+pl <- ggetho(dt, aes(y = asleep))
 pl
 # Sometimes, the variable of interest in not on the y axis, but on z axis (colour scale).
 # When we do not provide a y axis,
-# ggetho will make a ID fo each animal and display them on separate rows
-pl <- ggetho(dt, aes(z=asleep))
+# ggetho will make an ID fo each animal and display them on separate rows
+pl <- ggetho(dt, aes(z = asleep))
 pl
-# this one is the same type, but groups the animals by condition
-pl <- ggetho(dt, aes(z=asleep,y=condition))
+# this one is the same type, but it groups the animals by condition
+pl <- ggetho(dt, aes(z = asleep, y = condition))
 pl
 # sorting with paste
-pl <- ggetho(dt, aes(z=asleep,y=paste(condition, id)))
+pl <- ggetho(dt, aes(z = asleep,y = paste(condition, id)))
 pl
 
 # we want to summarise (wrap) data along a circadian day:
-pl <- ggetho(dt, aes(y=asleep), time_wrap=hours(24))
+pl <- ggetho(dt, aes(y = asleep), time_wrap = hours(24))
 pl
 
-# double ploted actogram:
+# double-plotted actogram:
 pl <- ggetho(dt,
-              aes(z=moving),
+              aes(z = moving),
               multiplot = 2,
               multiplot_period = hours(24))
 pl
 # then use `+ stat_tile_etho()` , or `+ stat_bar_tile_etho()`
+}
+\references{
+\itemize{
+\item The relevant \href{https://rethomics.github.io/ggetho.html#the-ggetho-function}{rethomic tutorial section}
+}
 }
 \seealso{
 \itemize{
 \item \link{stat_pop_etho} to show population trend by aggregating individuals over time
 \item \link{stat_tile_etho} to show variable of interest as colour intensity
 \item \link{stat_ld_annotations} to show light and dark phases on the plot
-@references
-\item The relevant \href{https://rethomics.github.io/ggetho.html#the-ggetho-function}{rethomic tutorial section}
 }
 }

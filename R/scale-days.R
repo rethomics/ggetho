@@ -10,7 +10,7 @@ scale_x_days <- function(name = "Time",
                          na.value = NA_real_,
                          position = "bottom",
                          time_wrap = NULL,
-                         unit="day") {
+                         unit = "day") {
 
   name <- sprintf("%s (%s)", name, unit)
   scale_x_continuous(

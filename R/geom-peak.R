@@ -1,25 +1,28 @@
 #' Visualise peaks within a spectrum/ distribution
 #'
-#' This function draws a point on the x-y coordinates of peaks and write their (y) value in the bottom of the plot.
+#' This function draws point on the x-y coordinates of peaks and write their (y) value on the bottom of the plot.
 #'
 #' @family layers
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @param peak_rank numerical vector specifying the rank(s) of peak(s) to draw
-#' @param conversion a function to convert values of `x` before writing.
-#' The default, `hours` will convert x (time) from seconds to hours.
+#' @param conversion function to convert values of `x` before writing.
+#' The default, `hours`, will convert x (time) from seconds to hours.
 #' @details
-#' Peaks are encoded as an additional column/aestetic with values corresponding to peak rank (and `0` when the point is not a peak).
-#' In other word, the mapping must provide `x`, `y` and `peak`. Only peaks matching `peak_rank` will be drawn (see example).
+#' Peaks are encoded as an additional column/aesthetic with values
+#' corresponding to peak rank (and `0` when the point is not a peak).
+#' In other word, the mapping must provide `x`, `y` and `peak`.
+#' Only peaks matching `peak_rank` will be drawn (see example).
+#'
 #' @examples
 #' # We make a data frame by hand with five rows
 #' # There are two peaks: in position 4 and 2
 #'
 #' df <- data.frame(x = hours(1:5),
 #'                  y = c(1,2,0,4,1),
-#'                  peak= c(0,2,0,1,0))
+#'                  peak = c(0,2,0,1,0))
 #'#  We draw the plot as a line
-#' pl <-  ggplot(df, aes(x,y, peak=peak)) +
+#' pl <-  ggplot(df, aes(x, y, peak = peak)) +
 #'                   geom_line() +
 #'                   scale_x_hours()
 #' pl
@@ -32,23 +35,24 @@
 #' pl + geom_peak(peak_rank = 2)
 #'
 #' # Just like with other geoms,
-#' # we can change things like colour, size, alpha, shape, ... :
-#' pl + geom_peak(colour = "red", size=10, alpha=.5, shape=20)
+#' # we can change colour, size, alpha, shape, ... :
+#' pl + geom_peak(colour = "red", size = 10, alpha = .5, shape = 20)
 #'
 #' ## With zeitgebr library:
 #' \dontrun{
 #' library(zeitgebr)
 #' # We make toy data
-#' metadata <- data.table(id=sprintf("toy_experiment|%02d" , 1:40), region_id=1:40,
-#'                        condition=c("A","B"),
-#'                        sex=c("M","M", "F", "F"))
-#' dt <- toy_activity_data(metadata, seed=107)
+#' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:40),
+#'                        region_id = 1:40,
+#'                        condition = c("A", "B"),
+#'                        sex = c("M", "M", "F", "F"))
+#' dt <- toy_activity_data(metadata, seed = 107)
 #' # We shift period of the group "A" by 0.01
 #' dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]
 #' # We  compute a periodogram for each individual
 #' per_dt <- periodogram(moving, dt, FUN = chi_sq_periodogram)
 #' per_dt <- find_peaks(per_dt)
-#' out <- ggperio(per_dt, aes(y=power - signif_threshold, colour=condition, peak=peak)) +
+#' out <- ggperio(per_dt, aes(y = power - signif_threshold, colour = condition, peak = peak)) +
 #'                     stat_pop_etho() +
 #'                     facet_wrap( ~ id, labeller = id_labeller)
 #' out
@@ -58,7 +62,7 @@
 #' * [ggperio] to create a periodogram
 #' * [zeitgebr::find_peaks] to add a `peak` column on a periodogram
 #' @references
-#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#population-plots) TODO
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#periodograms)
 #' @export
 geom_peak <- function(mapping = NULL, data = NULL,
                       stat = "identity", position = "identity",
@@ -117,7 +121,7 @@ GeomPeak <- ggproto("GeomPeak", GeomPoint,
                         grid::textGrob(
                           label,
                           coords$x,
-                          unit(0, "npc"),
+                          unit(0.05, "npc"),
                           hjust = data$hjust, vjust = data$vjust,
                           rot = data$angle,
                           gp = grid::gpar(

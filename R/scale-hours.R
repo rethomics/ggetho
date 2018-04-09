@@ -10,7 +10,7 @@ scale_x_hours <- function(name = "Time",
                           na.value = NA_real_,
                           position = "bottom",
                           time_wrap = NULL,
-                          unit="h") {
+                          unit = "h") {
   name <- sprintf("%s (%s)", name, unit)
   scale_x_continuous(
     name = name,

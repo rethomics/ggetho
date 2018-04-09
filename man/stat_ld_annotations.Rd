@@ -6,8 +6,9 @@
 \usage{
 stat_ld_annotations(mapping = NULL, data = NULL, position = "identity",
   ld_colours = c("white", "black"), ypos = "bottom", height = 0.03,
-  period = hours(24), phase = 0, outline = "black", x_limits = NA, ...,
-  na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE)
+  period = hours(24), phase = 0, l_duration = hours(12),
+  outline = "black", x_limits = c(NA, NA), ..., na.rm = FALSE,
+  show.legend = FALSE, inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
@@ -32,20 +33,22 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{ld_colours}{character vector of length 2 naming the colours for light and dark phases, respectively.
-The default is white and black.}
+\item{ld_colours}{character vector of length two naming
+the colours for light and dark phases, respectively.
+The default is \code{c("white", "black")}.}
 
-\item{ypos}{position and height of the annotation on the y axis. It can be either \code{"top"} of \code{"bottom"}.
+\item{ypos}{position and height of the annotation on the y axis.
+It can be either \code{"top"} of \code{"bottom"}.
 The default, \code{"bottom"} will put the labels below any data.}
 
 \item{height}{relative height of the rectangles. The default is 3 percent (0.03).}
 
-\item{period, phase}{period and phase (in seconds) of the LD cycle.}
+\item{period, phase, l_duration}{period, phase and duration of the L phase (in seconds) of the LD cycle.}
 
 \item{outline}{colour of the border of the rectangles. \code{NA} means no border.}
 
 \item{x_limits}{numerical vector of length 2 for the start and end of the annotations (in seconds).
-The default, \code{NA}, uses the full range of the plotted data.}
+The default, \code{c(NA, NA)}, uses the full range of the plotted data.}
 
 \item{...}{other arguments passed on to \code{\link{layer}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
@@ -71,22 +74,22 @@ This function is used to show light and dark (L and D) phases as boxes on top a 
 library(behavr)
 # we start by making a to dataset with 20 animals
 metadata <- data.frame(id = sprintf("toy_experiment | \%02d", 1:20),
-                   condition=c("A","B"))
-dt <- toy_activity_data(metadata,3)
+                   condition = c("A","B"))
+dt <- toy_activity_data(metadata, 3)
 # We build a plot object
-pl <-  ggetho(dt, aes(y=asleep)) + stat_pop_etho()
+pl <-  ggetho(dt, aes(y = asleep)) + stat_pop_etho()
 pl + stat_ld_annotations()
 # We can also put the annotations in the background:
-pl <-  ggetho(dt, aes(y=asleep)) +
-                 stat_ld_annotations(outline=NA) +
+pl <-  ggetho(dt, aes(y = asleep)) +
+                 stat_ld_annotations(outline = NA) +
                  stat_pop_etho()
 pl
 # different colours (e.g. DD)
-pl + stat_ld_annotations(ld_colour=c("grey", "black"))
+pl + stat_ld_annotations(ld_colour = c("grey", "black"))
 # shorter period
-pl + stat_ld_annotations(period=hours(22), phase=hours(3))
+pl + stat_ld_annotations(period = hours(22), phase = hours(3))
 # on a tile plot:
-pl <-  ggetho(dt, aes(z=asleep)) + stat_tile_etho()
+pl <-  ggetho(dt, aes(z = asleep)) + stat_tile_etho()
 pl + stat_ld_annotations()
 }
 \references{

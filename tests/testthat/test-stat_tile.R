@@ -16,7 +16,9 @@ test_that("stat_bar_tile_works", {
   #ggetho(dt, aes(z=activity)) + stat_bar_tile_etho(aes(fill=condition))
   ggetho(dt, aes(z=sqrt(activity))) + stat_bar_tile_etho()
   ggetho(dt, aes(z=sqrt(activity), y= condition)) + stat_bar_tile_etho()
-  ggetho(dt, aes(z=sqrt(activity), y= condition), time_wrap = hours(24)) + stat_bar_tile_etho()
+  pl <- ggetho(dt, aes(z=sqrt(activity), y= condition), time_wrap = hours(24)) + stat_bar_tile_etho()
+
+  testthat::expect_is(pl, "ggplot")
 })
 
 

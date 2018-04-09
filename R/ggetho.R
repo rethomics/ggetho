@@ -2,9 +2,9 @@
 #'
 #' This function summarises a variable of interest (y or z axis)
 #' in order to subsequently represent it over time (x axis)
-#' (either using `ggplot2` or the of plotting functions provided in `ggetho`).
+#' (using layers provided either by `ggplot2` or `ggetho`).
 #'
-#' @param data [behavr] table containing the data and metadata
+#' @param data [behavr::behavr] table containing the data and metadata
 #' @param mapping default list of aesthetic mappings to use for plot
 #' @param summary_FUN method (function) used to summarise `variable` over time (typically, the mean)
 #' @param summary_time_window width (in seconds) of the time window to compute a summary on
@@ -20,42 +20,43 @@
 #' For instance,  `time_offset = hours(12)` puts the circadian reference (ZT0) in the middle of the plot.
 #'
 #' Multiplots is a generalistion of double-plotting, tripple-plotting...
-#' This type or representation is usefull to understand periodic behaviours.
-#' When `multiplot` is not NULL, data is repeated as
-#' many time along the x axis to generate a double (when `multiplot=2`) plotted actogram
-#' The y axis then is the period (typically the day) onset.
+#' This type or representation is useful to understand periodic behaviours.
+#' When `multiplot` is *not* NULL, data is repeated as
+#' many time as its value along the x axis to generate a double (when `multiplot = 2`) plotted actogram.
+#' The y axis is then the period (typically the day) onset.
 #' It is possible to set duration of the period, which is typically 24h to arbitrary values using the
 #' `multiplot_period` argument.
 #'
 #' @return an initial plot object that can be further edited.
+#'
 #' @examples
-#' # We start by making a to dataset with 20 animals
-#' metadata <- data.table(id= sprintf("toy_experiment|%02d", 1:20),
-#'                    condition=c("A","B"))
+#' # We start by making a dataset with 20 animals
+#' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:20),
+#'                    condition = c("A", "B"))
 #' dt <- toy_activity_data(metadata, 3)
 #' # We build a plot object with **nothing inside** (just the axis)
 #' # we want to show proportion of time sleeping  on the y axis:
-#' pl <- ggetho(dt, aes(y=asleep))
+#' pl <- ggetho(dt, aes(y = asleep))
 #' pl
 #' # Sometimes, the variable of interest in not on the y axis, but on z axis (colour scale).
 #' # When we do not provide a y axis,
-#' # ggetho will make a ID fo each animal and display them on separate rows
-#' pl <- ggetho(dt, aes(z=asleep))
+#' # ggetho will make an ID fo each animal and display them on separate rows
+#' pl <- ggetho(dt, aes(z = asleep))
 #' pl
-#' # this one is the same type, but groups the animals by condition
-#' pl <- ggetho(dt, aes(z=asleep,y=condition))
+#' # this one is the same type, but it groups the animals by condition
+#' pl <- ggetho(dt, aes(z = asleep, y = condition))
 #' pl
 #' # sorting with paste
-#' pl <- ggetho(dt, aes(z=asleep,y=paste(condition, id)))
+#' pl <- ggetho(dt, aes(z = asleep,y = paste(condition, id)))
 #' pl
 #'
 #' # we want to summarise (wrap) data along a circadian day:
-#' pl <- ggetho(dt, aes(y=asleep), time_wrap=hours(24))
+#' pl <- ggetho(dt, aes(y = asleep), time_wrap = hours(24))
 #' pl
 #'
-#' # double ploted actogram:
+#' # double-plotted actogram:
 #' pl <- ggetho(dt,
-#'               aes(z=moving),
+#'               aes(z = moving),
 #'               multiplot = 2,
 #'               multiplot_period = hours(24))
 #' pl
@@ -64,17 +65,17 @@
 #' * [stat_pop_etho] to show population trend by aggregating individuals over time
 #' * [stat_tile_etho] to show variable of interest as colour intensity
 #' * [stat_ld_annotations] to show light and dark phases on the plot
-#'  @references
+#'@references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#the-ggetho-function)
 #' @export
 ggetho <- function(data,
                     mapping,
                     summary_FUN = mean,
                     summary_time_window = mins(30),
-                    time_wrap=NULL,
-                    time_offset=0,
-                    multiplot=NULL, # 1
-                    multiplot_period= hours(24),
+                    time_wrap = NULL,
+                    time_offset = 0,
+                    multiplot = NULL, # 1
+                    multiplot_period = hours(24),
                     ...){
 
   if(time_offset != 0 & is.null(time_wrap))
@@ -91,7 +92,7 @@ ggetho <- function(data,
     stop("multiplot must be an integer >1, typically 2, for double plotting")
   }
 
-  mapping_list <-as.list(as.character(mapping))
+  mapping_list <- as.list(as.character(mapping))
   aes_names <- names(mapping_list)
 
   has_colour = "colour" %in% aes_names
