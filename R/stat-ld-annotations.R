@@ -100,8 +100,9 @@ ldAnnotation <- function(x, period=1, phase=0){
   ld <- ifelse(((box_pos - phase) %% period)/p2, "L","D")
   out <- data.table::data.table(ld=ld, xmin=box_pos, xmax=box_pos + p2)
   out <- out[left < xmax & right >xmin]
-  out[1, xmin := left]
-  out[.N, xmax := right]
+  # dummy variable for knitr otherwise it prints `out``
+  i <- out[1, xmin := left]
+  i <- out[.N, xmax := right]
   out
 }
 
