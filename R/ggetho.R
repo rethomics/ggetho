@@ -78,6 +78,10 @@ ggetho <- function(data,
                     multiplot_period = hours(24),
                     ...){
 
+
+  # trick to avoid NOTES from R CMD check:
+  x_off = x_name = y =  . = NULL
+
   if(time_offset != 0 & is.null(time_wrap))
     warning("Time offset only relevant when using time_wrap.
              Ignoring argument")
@@ -203,6 +207,10 @@ auto_x_time_scale <- function(t){
 }
 
 make_multiplot <- function(data, n, per, summary_time_window){
+
+  # trick to avoid NOTES from R CMD check:
+  period = NULL
+
   data[, period := floor(t/per)]
   t_map <- data.table(t = seq(0, per* n, by=summary_time_window))
   min_per <- data[, min(period)]

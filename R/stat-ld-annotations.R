@@ -111,6 +111,12 @@ StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,
 ld_annotation <- function(x, period = 1,
                           phase = 0,
                           l_ratio = 0.5){
+
+
+  # trick to avoid NOTES from R CMD check:
+  xmin = xmax = y =  . = NULL
+
+
   if(!(abs(phase) <= period))
     stop("Phase should be lower or equal to period!")
 
