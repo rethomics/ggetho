@@ -140,7 +140,6 @@ ld_annotation <- function(x, period = 1,
 
   out[, xmax := c(out[2 : .N, xmin], right)]
   out[xmin < left, xmin := left]
-  print(out)
   out <- out[xmin < xmax]
   out
 
