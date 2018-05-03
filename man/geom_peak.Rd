@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-peak.R
 \name{geom_peak}
 \alias{geom_peak}
-\title{Visualise peaks within a spectrum/ distribution}
+\title{Visualise peaks in a power spectrum or periodogram}
 \usage{
 geom_peak(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ..., na.rm = TRUE, show.legend = NA,
@@ -53,15 +53,15 @@ the default plot specification, e.g. \code{\link{borders}}.}
 
 \item{peak_rank}{numerical vector specifying the rank(s) of peak(s) to draw}
 
-\item{conversion}{function to convert values of \code{x} before writing.
-The default, \code{hours}, will convert x (time) from seconds to hours.}
+\item{conversion}{function to convert values of \code{x} to a specific unit.
+The default, \code{hours}, will write x (time) in decimal hours.}
 }
 \description{
-This function draws point on the x-y coordinates of peaks and write their (y) value on the bottom of the plot.
+This function draws points on the x-y coordinates of slected peaks and write their (y) value on the bottom of the plot.
 }
 \details{
-Peaks are encoded as an additional column/aesthetic with values
-corresponding to peak rank (and \code{0} when the point is not a peak).
+In the input data, peaks are encoded as an additional column/aesthetic with values
+corresponding to peak ranks (and \code{0} when the point is not a peak).
 In other word, the mapping must provide \code{x}, \code{y} and \code{peak}.
 Only peaks matching \code{peak_rank} will be drawn (see example).
 }
@@ -70,8 +70,8 @@ Only peaks matching \code{peak_rank} will be drawn (see example).
 # There are two peaks: in position 4 and 2
 
 df <- data.frame(x = hours(1:5),
-                 y = c(1,2,0,4,1),
-                 peak = c(0,2,0,1,0))
+                 y = c(1, 2, 0, 4, 1),
+                 peak = c(0, 2, 0, 1, 0))
 #  We draw the plot as a line
 pl <-  ggplot(df, aes(x, y, peak = peak)) +
                   geom_line() +
@@ -89,7 +89,8 @@ pl + geom_peak(peak_rank = 2)
 # we can change colour, size, alpha, shape, ... :
 pl + geom_peak(colour = "red", size = 10, alpha = .5, shape = 20)
 
-## With zeitgebr library:
+## In the context of circadian analysis,
+# Using the zeitgebr library:
 \dontrun{
 library(zeitgebr)
 # We make toy data
@@ -118,7 +119,6 @@ out + geom_peak(colour="black")
 \seealso{
 \itemize{
 \item \link{ggperio} to create a periodogram
-\item \link[zeitgebr:find_peaks]{zeitgebr::find_peaks} to add a \code{peak} column on a periodogram
 }
 
 Other layers: \code{\link{stat_bar_tile_etho}},

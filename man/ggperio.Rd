@@ -14,13 +14,14 @@ ggperio(data, mapping = aes(x = period, y = power), ...)
 \item{...}{additional arguments to be passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 }
 \description{
-Represents spectral data, showing period on the \code{x} axis, and power (or equivalent) on the \code{y} axis.
+This function summarises periodogram data (containing periodogram of multiple individual),
+to show period on the \code{x} axis, and power (or equivalent) on the \code{y} axis.
 }
 \examples{
 \dontrun{
 library(zeitgebr)
 # We make toy data
-metadata <- data.table(id = sprintf("toy_experiment|\%02d" , 1:40),
+metadata <- data.table(id = sprintf("toy_experiment|\%02d", 1:40),
                        region_id = 1:40,
                        condition = c("A", "B"),
                        sex = c("M", "M", "F", "F"))
@@ -49,6 +50,5 @@ out +  stat_pop_etho() + facet_wrap( ~ id, labeller = id_labeller)
 \itemize{
 \item \link{ggetho} to plot time series
 \item \link{geom_peak} to draw peaks on a periodogram
-\item \link[zeitgebr:periodogram]{zeitgebr::periodogram} to compute periodograms in a first place
 }
 }

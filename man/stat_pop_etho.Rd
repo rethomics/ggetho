@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat-pop-etho.R
 \name{stat_pop_etho}
 \alias{stat_pop_etho}
-\title{Compute and display a population aggregate for a behavioural variable of interest}
+\title{Compute and display a population aggregate for a variable of interest}
 \usage{
 stat_pop_etho(mapping = NULL, data = NULL, geom = "smooth",
   position = "identity", ..., method = mean_se, method.args = list(),
@@ -57,31 +57,31 @@ the default plot specification, e.g. \code{\link{borders}}.}
 }
 \description{
 This function displays the temporal (time on the x axis) trend of variable of interest,
-on the y axis as a line with error bars.
+on the y axis as a line with confidence interval as a shaded area.
 }
 \examples{
 library(behavr)
 metadata <- data.frame(id = sprintf("toy_experiment | \%02d", 1:20),
                    age=c(1, 5, 10, 20),
-                   condition=c("A","B"))
-dt <- toy_activity_data(metadata,3)
+                   condition=c("A", "B"))
+dt <- toy_activity_data(metadata, 3)
 # We build a plot object
-pl <-  ggetho(dt, aes(y=asleep))
+pl <-  ggetho(dt, aes(y = asleep))
 # A standard plot of the whole population:
 pl + stat_pop_etho()
 # We can also split by condition, and display the two population on different facets:
 pl + stat_pop_etho() + facet_grid(condition ~ .)
 
 # Instead, we can use different colour for separate conditions:
-pl <-  ggetho(dt, aes(y=asleep, colour=condition))
+pl <-  ggetho(dt, aes(y = asleep, colour = condition))
 pl + stat_pop_etho()
 
-#sometimes, we also have numeric condition (e.g. age)
-pl <-  ggetho(dt, aes(y=asleep, colour=age))
+# Sometimes, we also have numeric condition (e.g. age)
+pl <-  ggetho(dt, aes(y = asleep, colour = age))
 pl + stat_pop_etho()
-# sometimes we want to aggreate several days of data to one circadian day (i.e. time wrapping)
+# We could want to aggreate several days of data to one circadian day (i.e. time wrapping)
 # here, we also plot the invert of moving (!moving)
-pl <-  ggetho(dt, aes(y=!moving), time_wrap=hours(24))
+pl <-  ggetho(dt, aes(y = !moving), time_wrap = hours(24))
 pl + stat_pop_etho()
 }
 \references{
@@ -94,7 +94,7 @@ pl + stat_pop_etho()
 \item \link{ggetho} to generate a plot object
 \item \link{stat_tile_etho} to show variable of interest as colour intensity
 \item \link{stat_ld_annotations} to show light and dark phases on the plot
-\item \link[ggplot2:stat_smooth]{ggplot2::stat_smooth} to understand how to change the type of error bars etc
+\item \link[ggplot2:stat_smooth]{ggplot2::stat_smooth} to understand how to change the type of confidence interval, line colour and such
 }
 
 Other layers: \code{\link{geom_peak}},

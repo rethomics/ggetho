@@ -5,14 +5,14 @@
 #' @family layers
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_rect
-#' @param ld_colours character vector of length two naming
-#' the colours for light and dark phases, respectively.
+#' @param ld_colours character vector of length two setting the
+#' colours for light and dark phases, respectively.
 #' The default is `c("white", "black")`.
 #' @param ypos position and height of the annotation on the y axis.
-#' It can be either `"top"` of `"bottom"`.
+#' It can be either `"top"` or `"bottom"`.
 #' The default, `"bottom"` will put the labels below any data.
 #' @param height relative height of the rectangles. The default is 3 percent (0.03).
-#' @param outline colour of the border of the rectangles. `NA` means no border.
+#' @param outline colour of the border of the rectangles. A value of `NA` draws no border.
 #' @param x_limits numerical vector of length 2 for the start and end of the annotations (in seconds).
 #' The default, `c(NA, NA)`, uses the full range of the plotted data.
 #' @param period,phase,l_duration period, phase and duration of the L phase (in seconds) of the LD cycle.
@@ -20,7 +20,7 @@
 #' library(behavr)
 #' # we start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
-#'                    condition = c("A","B"))
+#'                    condition = c("A", "B"))
 #' dt <- toy_activity_data(metadata, 3)
 #' # We build a plot object
 #' pl <-  ggetho(dt, aes(y = asleep)) + stat_pop_etho()
@@ -61,9 +61,9 @@ stat_ld_annotations <- function (mapping = NULL,
   layer(data = data, mapping = mapping, stat = StatLDAnnotation,
         geom = GeomLD,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(na.rm = na.rm, ld_colours=ld_colours, ypos=ypos,height=height,
-                      phase=phase, period=period, l_duration = l_duration,
-                      ld_boxes=NULL, outline=outline,x_limits =x_limits, ...))
+        params = list(na.rm = na.rm, ld_colours = ld_colours, ypos = ypos,height=height,
+                      phase = phase, period = period, l_duration = l_duration,
+                      ld_boxes = NULL, outline = outline,x_limits = x_limits, ...))
 }
 
 StatLDAnnotation <- ggplot2::ggproto("StatLDannotation", ggplot2::Stat,

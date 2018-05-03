@@ -3,7 +3,7 @@
 \name{stat_bar_tile_etho}
 \alias{stat_bar_tile_etho}
 \alias{stat_tile_etho}
-\title{Display a behavioural variable of interest as colour intensity value or bar height}
+\title{Display a variable of interest either as colour intensity value or a bar height}
 \usage{
 stat_bar_tile_etho(mapping = NULL, data = NULL, geom = "bar_tile",
   position = "identity", ..., method = mean, method.args = list(),
@@ -44,7 +44,7 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 
 \item{method}{function used to compute the aggregate, when grouping individuals on the same row.
-The default is \link{mean}. \link{median}, \link{min}, \link{max} are other examples of other functions one can use.}
+The default is \link{mean}. \link{median}, \link{min}, \link{max} are examples of other functions that can be used.}
 
 \item{method.args}{List of additional arguments passed on to the modelling
 function defined by \code{method}.}
@@ -62,15 +62,15 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link{borders}}.}
 }
 \description{
-These function shows the temporal trend (time on the x axis) of a varible of interest (z axis)
-as either colour instensity (\code{stat_tile_etho}) or using the hight of the tiles (\code{stat_bar_tile_etho}).
-In both cases, the y axis is a discrete variable such as a treatment or the id of animals.
+These functions show the temporal trend (time on the x axis) of a variable of interest (z axis)
+as either colour intensity (\code{stat_tile_etho}) or using the hight of the tiles (\code{stat_bar_tile_etho}).
+In both cases, the y axis is a discrete variable such as a treatment or the id of individuals.
 }
 \examples{
-# we start by making a to dataset with 20 animals
+# We start by making a to dataset with 20 animals
 metadata <- data.frame(id = sprintf("toy_experiment | \%02d", 1:20),
                    age = c(1, 5, 10, 20),
-                   condition = c("A","B"))
+                   condition = c("A", "B"))
 print(metadata)
 dt <- toy_activity_data(metadata, 3)
 # We build a plot object
@@ -91,7 +91,7 @@ pl + stat_tile_etho()
 # Instead, of the average, maybe we want to show the highest (max)
 # posible value of sleep for any time point
 pl + stat_tile_etho(method = max)
-# we can also use stat_bar_tile as an alternative
+# We can also use stat_bar_tile as an alternative
 pl + stat_bar_tile_etho()
 }
 \references{

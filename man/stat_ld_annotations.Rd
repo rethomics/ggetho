@@ -33,19 +33,19 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{ld_colours}{character vector of length two naming
-the colours for light and dark phases, respectively.
+\item{ld_colours}{character vector of length two setting the
+colours for light and dark phases, respectively.
 The default is \code{c("white", "black")}.}
 
 \item{ypos}{position and height of the annotation on the y axis.
-It can be either \code{"top"} of \code{"bottom"}.
+It can be either \code{"top"} or \code{"bottom"}.
 The default, \code{"bottom"} will put the labels below any data.}
 
 \item{height}{relative height of the rectangles. The default is 3 percent (0.03).}
 
 \item{period, phase, l_duration}{period, phase and duration of the L phase (in seconds) of the LD cycle.}
 
-\item{outline}{colour of the border of the rectangles. \code{NA} means no border.}
+\item{outline}{colour of the border of the rectangles. A value of \code{NA} draws no border.}
 
 \item{x_limits}{numerical vector of length 2 for the start and end of the annotations (in seconds).
 The default, \code{c(NA, NA)}, uses the full range of the plotted data.}
@@ -74,7 +74,7 @@ This function is used to show light and dark (L and D) phases as boxes on top a 
 library(behavr)
 # we start by making a to dataset with 20 animals
 metadata <- data.frame(id = sprintf("toy_experiment | \%02d", 1:20),
-                   condition = c("A","B"))
+                   condition = c("A", "B"))
 dt <- toy_activity_data(metadata, 3)
 # We build a plot object
 pl <-  ggetho(dt, aes(y = asleep)) + stat_pop_etho()

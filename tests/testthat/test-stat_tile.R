@@ -2,9 +2,9 @@ context("stat_tile and bar tile work")
 
 test_that("stat_bar_tile_works", {
 
-  metadata <- data.frame(id = paste0("toy_experiment|",1:30),
+  metadata <- data.frame(id = paste0("toy_experiment|",1:15),
                          condition = c("A", "B", "C"))
-  dt <- toy_dam_data(metadata,  duration = days(5))
+  dt <- toy_dam_data(metadata,  duration = days(4))
 
   ggetho(dt, aes(z=activity)) + stat_tile_etho()
   ggetho(dt, aes(z= activity  , y=condition)) +
