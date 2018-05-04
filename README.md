@@ -1,4 +1,6 @@
-# `ggetho` [![Travis-CI Build Status](https://travis-ci.org/rethomics/ggetho.svg?branch=master)](https://travis-ci.org/rethomics/ggetho)[![Coverage Status](https://img.shields.io/codecov/c/github/rethomics/ggetho/master.svg)](https://codecov.io/github/ggetho/behavr?branch=master)
+# `ggetho` 
+[![Travis-CI Build Status](https://travis-ci.org/rethomics/ggetho.svg?branch=master)](https://travis-ci.org/rethomics/ggetho)
+[![codecov](https://codecov.io/gh/rethomics/ggetho/branch/master/graph/badge.svg)](https://codecov.io/gh/rethomics/ggetho)
 
 <!-- [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/hms?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/hms)  -->
 

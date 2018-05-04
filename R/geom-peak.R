@@ -1,16 +1,16 @@
-#' Visualise peaks within a spectrum/ distribution
+#' Visualise peaks in a power spectrum or periodogram
 #'
-#' This function draws point on the x-y coordinates of peaks and write their (y) value on the bottom of the plot.
+#' This function draws points on the x-y coordinates of slected peaks and write their (y) value on the bottom of the plot.
 #'
 #' @family layers
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @param peak_rank numerical vector specifying the rank(s) of peak(s) to draw
-#' @param conversion function to convert values of `x` before writing.
-#' The default, `hours`, will convert x (time) from seconds to hours.
+#' @param conversion function to convert values of `x` to a specific unit.
+#' The default, `hours`, will write x (time) in decimal hours.
 #' @details
-#' Peaks are encoded as an additional column/aesthetic with values
-#' corresponding to peak rank (and `0` when the point is not a peak).
+#' In the input data, peaks are encoded as an additional column/aesthetic with values
+#' corresponding to peak ranks (and `0` when the point is not a peak).
 #' In other word, the mapping must provide `x`, `y` and `peak`.
 #' Only peaks matching `peak_rank` will be drawn (see example).
 #'
@@ -19,8 +19,8 @@
 #' # There are two peaks: in position 4 and 2
 #'
 #' df <- data.frame(x = hours(1:5),
-#'                  y = c(1,2,0,4,1),
-#'                  peak = c(0,2,0,1,0))
+#'                  y = c(1, 2, 0, 4, 1),
+#'                  peak = c(0, 2, 0, 1, 0))
 #'#  We draw the plot as a line
 #' pl <-  ggplot(df, aes(x, y, peak = peak)) +
 #'                   geom_line() +
@@ -38,7 +38,8 @@
 #' # we can change colour, size, alpha, shape, ... :
 #' pl + geom_peak(colour = "red", size = 10, alpha = .5, shape = 20)
 #'
-#' ## With zeitgebr library:
+#' ## In the context of circadian analysis,
+#' # Using the zeitgebr library:
 #' \dontrun{
 #' library(zeitgebr)
 #' # We make toy data
@@ -60,7 +61,8 @@
 #' }
 #' @seealso
 #' * [ggperio] to create a periodogram
-#' * [zeitgebr::find_peaks] to add a `peak` column on a periodogram
+# TODO add to doc iff zeitgebr in CRAN
+# * [zeitgebr::find_peaks] to automatically add a `peak` column on periodogram data
 #' @references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#periodograms)
 #' @export

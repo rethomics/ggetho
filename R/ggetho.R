@@ -19,7 +19,7 @@
 #' Instead of representing data from the start of the day, it can be done from any offset, using `time_offset`.
 #' For instance,  `time_offset = hours(12)` puts the circadian reference (ZT0) in the middle of the plot.
 #'
-#' Multiplots is a generalistion of double-plotting, tripple-plotting...
+#' 'Multiplot' is a generalisation of double-plotting, triple-plotting...
 #' This type or representation is useful to understand periodic behaviours.
 #' When `multiplot` is *not* NULL, data is repeated as
 #' many time as its value along the x axis to generate a double (when `multiplot = 2`) plotted actogram.
@@ -77,6 +77,10 @@ ggetho <- function(data,
                     multiplot = NULL, # 1
                     multiplot_period = hours(24),
                     ...){
+
+
+  # trick to avoid NOTES from R CMD check:
+  x_off = x_name = y =  . = NULL
 
   if(time_offset != 0 & is.null(time_wrap))
     warning("Time offset only relevant when using time_wrap.
@@ -203,6 +207,10 @@ auto_x_time_scale <- function(t){
 }
 
 make_multiplot <- function(data, n, per, summary_time_window){
+
+  # trick to avoid NOTES from R CMD check:
+  period = NULL
+
   data[, period := floor(t/per)]
   t_map <- data.table(t = seq(0, per* n, by=summary_time_window))
   min_per <- data[, min(period)]

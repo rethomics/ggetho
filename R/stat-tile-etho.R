@@ -1,19 +1,19 @@
-#' Display a behavioural variable of interest as colour intensity value or bar height
+#' Display a variable of interest either as colour intensity value or a bar height
 #'
-#' These function shows the temporal trend (time on the x axis) of a varible of interest (z axis)
-#' as either colour instensity (`stat_tile_etho`) or using the hight of the tiles (`stat_bar_tile_etho`).
-#' In both cases, the y axis is a discrete variable such as a treatment or the id of animals.
+#' These functions show the temporal trend (time on the x axis) of a variable of interest (z axis)
+#' as either colour intensity (`stat_tile_etho`) or using the hight of the tiles (`stat_bar_tile_etho`).
+#' In both cases, the y axis is a discrete variable such as a treatment or the id of individuals.
 #'
 #' @family layers
 #' @inheritParams ggplot2::stat_summary_2d
 #' @inheritParams stat_pop_etho
 #' @param method function used to compute the aggregate, when grouping individuals on the same row.
-#' The default is [mean]. [median], [min], [max] are other examples of other functions one can use.
+#' The default is [mean]. [median], [min], [max] are examples of other functions that can be used.
 #' @examples
-#' # we start by making a to dataset with 20 animals
+#' # We start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
 #'                    age = c(1, 5, 10, 20),
-#'                    condition = c("A","B"))
+#'                    condition = c("A", "B"))
 #' print(metadata)
 #' dt <- toy_activity_data(metadata, 3)
 #' # We build a plot object
@@ -34,7 +34,7 @@
 #' # Instead, of the average, maybe we want to show the highest (max)
 #' # posible value of sleep for any time point
 #' pl + stat_tile_etho(method = max)
-#' # we can also use stat_bar_tile as an alternative
+#' # We can also use stat_bar_tile as an alternative
 #' pl + stat_bar_tile_etho()
 #' @seealso
 #' * [ggetho] to generate a plot object
