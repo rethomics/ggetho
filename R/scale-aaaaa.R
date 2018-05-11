@@ -15,16 +15,19 @@
 #' pl + scale_x_hours(breaks = days(c(1, 2)))
 #' pl + scale_x_hours()
 #' pl + scale_x_days(breaks = days(c(1, 2)))
-#'  pl + scale_x_days()
+#' pl + scale_x_days()
+#'
+#' # To express time modulus `time_wrap`
+#' # e.g. time n the day
+#' pl + scale_x_hours(time_wrap = hours(24)) +
+#'      coord_cartesian(xlim=c(0, days(2)))
+#'
 #' # on a shorter time scale
 #' pl <-  ggetho(dt[t < hours(5)], aes(z = asleep)) + stat_tile_etho()
 #' pl + scale_x_hours()
 #' pl + scale_x_hours(breaks = hours(1:4))
 #' pl + scale_x_seconds(breaks = hours(1:4))
-#'
-#' # time wraping
-#' pl <-  ggetho(dt[t < days(2)], aes(y = asleep)) + stat_pop_etho()
-#' pl + scale_x_hours(time_wrap = hours(24))
+
 #' @seealso
 #' * [ggetho] to generate a plot object
 #' * [ggplot2::scale_x_continuous], the defaut ggplot scale, to understand limits, breaks, labels and name
