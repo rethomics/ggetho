@@ -18,7 +18,7 @@
 #' @param period,phase,l_duration period, phase and duration of the L phase (in seconds) of the LD cycle.
 #' @examples
 #' library(behavr)
-#' # we start by making a to dataset with 20 animals
+#' # We start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
 #'                    condition = c("A", "B"))
 #' dt <- toy_activity_data(metadata, 3)
@@ -30,11 +30,11 @@
 #'                  stat_ld_annotations(outline = NA) +
 #'                  stat_pop_etho()
 #' pl
-#' # different colours (e.g. DD)
+#' # Different colours (e.g. DD)
 #' pl + stat_ld_annotations(ld_colour = c("grey", "black"))
-#' # shorter period
+#' # Shorter period
 #' pl + stat_ld_annotations(period = hours(22), phase = hours(3))
-#' # on a tile plot:
+#' # On a tile plot:
 #' pl <-  ggetho(dt, aes(z = asleep)) + stat_tile_etho()
 #' pl + stat_ld_annotations()
 #' @seealso

@@ -5,7 +5,8 @@ Version: 0.3.1
 Authors@R: c(
     person("Quentin", "Geissmann", role = c("aut", "cre"), email = "qgeissmann@gmail.com")
     )
-Description: Extends 'ggplot2' primarily to represent animal behaviour data, generally recorded over multiple days.
+Description: Extension of 'ggplot2' providing layers, scales and preprocessing functions
+    useful to represent behavioural variables that are recorded over multiple animals and days.
 Depends:  
     R (>= 3.00),
     ggplot2,

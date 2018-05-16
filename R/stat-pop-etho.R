@@ -6,10 +6,10 @@
 #' @family layers
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::stat_smooth
-#' @param method function used to compute the aggregate and error bars.
+#' @param method function used to compute the aggregate and  confidence intervals.
 #' It should return (`y`, `ymin` and `ymax`).
 #' The default is [ggplot2::mean_se], which computes the mean + or - standard error.
-#' [ggplot2::mean_cl_boot] can be used instead to generate bootstrap confidence interval.
+#' [ggplot2::mean_cl_boot] can be used instead to generate bootstrap confidence interval instead.
 #' @examples
 #' library(behavr)
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
@@ -38,7 +38,7 @@
 #' * [ggetho] to generate a plot object
 #' * [stat_tile_etho] to show variable of interest as colour intensity
 #' * [stat_ld_annotations] to show light and dark phases on the plot
-#' * [ggplot2::stat_smooth] to understand how to change the type of confidence interval, line colour and such
+#' * [ggplot2::stat_smooth] to understand how to change the type of confidence interval, line colour and so forth
 #' @references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#population-plots)
 #' @export

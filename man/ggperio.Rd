@@ -50,5 +50,6 @@ out +  stat_pop_etho() + facet_wrap( ~ id, labeller = id_labeller)
 \itemize{
 \item \link{ggetho} to plot time series
 \item \link{geom_peak} to draw peaks on a periodogram
+\item \link[zeitgebr:periodogram]{zeitgebr::periodogram} to compute periodograms in a first place
 }
 }

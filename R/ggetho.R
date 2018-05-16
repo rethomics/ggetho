@@ -19,15 +19,15 @@
 #' Instead of representing data from the start of the day, it can be done from any offset, using `time_offset`.
 #' For instance,  `time_offset = hours(12)` puts the circadian reference (ZT0) in the middle of the plot.
 #'
-#' 'Multiplot' is a generalisation of double-plotting, triple-plotting...
+#' Multiplotting is a generalisation of double-plotting, triple-plotting...
 #' This type or representation is useful to understand periodic behaviours.
 #' When `multiplot` is *not* NULL, data is repeated as
-#' many time as its value along the x axis to generate a double (when `multiplot = 2`) plotted actogram.
+#' many time as its value, along the x axis.
 #' The y axis is then the period (typically the day) onset.
-#' It is possible to set duration of the period, which is typically 24h to arbitrary values using the
+#' It is possible to set duration of the period, which is typically 24 h to arbitrary values using the
 #' `multiplot_period` argument.
 #'
-#' @return an initial plot object that can be further edited.
+#' @return An initial plot object that can be further edited.
 #'
 #' @examples
 #' # We start by making a dataset with 20 animals

@@ -91,20 +91,20 @@ scales, "top" or "bottom" for horizontal scales}
 
 \item{time_wrap}{duration (in seconds) used to wrap the labels of the time axis}
 
-\item{unit}{the unit string to be use in the label (e.g. one could use \code{"second"} instead of \code{"s"})}
+\item{unit}{the name of unit (string) to be used in the label (e.g. one could use \code{"second"} instead of \code{"s"})}
 }
 \description{
-A set of scales used to represent behaviour durations.
+A set of scales used to represent experimental durations.
 }
 \details{
 \code{time_wrap} is useful, for instance, to express time within a day (ZT), instead of absolute time.
 }
 \examples{
-# we generate some data
+# We generate some data
 metadata <- data.frame(id = sprintf("toy_experiment | \%02d", 1:20),
                    condition = c("A","B"))
 dt <- toy_activity_data(metadata, 3)
-# then, a simple plot
+# Then, a simple plot
 pl <-  ggetho(dt, aes(y = asleep)) + stat_pop_etho()
 pl + scale_x_hours(breaks = days(c(1, 2)))
 pl + scale_x_hours()
@@ -116,7 +116,7 @@ pl + scale_x_days()
 pl + scale_x_hours(time_wrap = hours(24)) +
      coord_cartesian(xlim=c(0, days(2)))
 
-# on a shorter time scale
+# On a shorter time scale
 pl <-  ggetho(dt[t < hours(5)], aes(z = asleep)) + stat_tile_etho()
 pl + scale_x_hours()
 pl + scale_x_hours(breaks = hours(1:4))

@@ -3,7 +3,7 @@
 \name{stat_bar_tile_etho}
 \alias{stat_bar_tile_etho}
 \alias{stat_tile_etho}
-\title{Display a variable of interest either as colour intensity value or a bar height}
+\title{Display a variable of interest either as a colour intensity value or as a bar height}
 \usage{
 stat_bar_tile_etho(mapping = NULL, data = NULL, geom = "bar_tile",
   position = "identity", ..., method = mean, method.args = list(),
@@ -43,8 +43,8 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 \code{color = "red"} or \code{size = 3}. They may also be parameters
 to the paired geom/stat.}
 
-\item{method}{function used to compute the aggregate, when grouping individuals on the same row.
-The default is \link{mean}. \link{median}, \link{min}, \link{max} are examples of other functions that can be used.}
+\item{method}{function used to compute the aggregate, when/if grouping several individuals on the same row.
+The default is fucntion is \link{mean}. \link{median}, \link{min}, \link{max} are examples of alternatives.}
 
 \item{method.args}{List of additional arguments passed on to the modelling
 function defined by \code{method}.}

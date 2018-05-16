@@ -28,7 +28,7 @@ ggetho(data, mapping, summary_FUN = mean, summary_time_window = mins(30),
 \item{...}{additional arguments to be passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 }
 \value{
-an initial plot object that can be further edited.
+An initial plot object that can be further edited.
 }
 \description{
 This function summarises a variable of interest (y or z axis)
@@ -42,12 +42,12 @@ In this case, \code{time_wrap = hours(24)}.
 Instead of representing data from the start of the day, it can be done from any offset, using \code{time_offset}.
 For instance,  \code{time_offset = hours(12)} puts the circadian reference (ZT0) in the middle of the plot.
 
-'Multiplot' is a generalisation of double-plotting, triple-plotting...
+Multiplotting is a generalisation of double-plotting, triple-plotting...
 This type or representation is useful to understand periodic behaviours.
 When \code{multiplot} is \emph{not} NULL, data is repeated as
-many time as its value along the x axis to generate a double (when \code{multiplot = 2}) plotted actogram.
+many time as its value, along the x axis.
 The y axis is then the period (typically the day) onset.
-It is possible to set duration of the period, which is typically 24h to arbitrary values using the
+It is possible to set duration of the period, which is typically 24 h to arbitrary values using the
 \code{multiplot_period} argument.
 }
 \examples{

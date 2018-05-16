@@ -1,6 +1,6 @@
 #' Visualise peaks in a power spectrum or periodogram
 #'
-#' This function draws points on the x-y coordinates of slected peaks and write their (y) value on the bottom of the plot.
+#' This function draws points on the x-y coordinates of selected peaks and write their (y) value on the bottom of the plot.
 #'
 #' @family layers
 #' @inheritParams ggplot2::layer

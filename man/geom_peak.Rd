@@ -57,7 +57,7 @@ the default plot specification, e.g. \code{\link{borders}}.}
 The default, \code{hours}, will write x (time) in decimal hours.}
 }
 \description{
-This function draws points on the x-y coordinates of slected peaks and write their (y) value on the bottom of the plot.
+This function draws points on the x-y coordinates of selected peaks and write their (y) value on the bottom of the plot.
 }
 \details{
 In the input data, peaks are encoded as an additional column/aesthetic with values
@@ -119,6 +119,7 @@ out + geom_peak(colour="black")
 \seealso{
 \itemize{
 \item \link{ggperio} to create a periodogram
+\item \link[zeitgebr:find_peaks]{zeitgebr::find_peaks} to automatically add a \code{peak} column on periodogram data
 }
 
 Other layers: \code{\link{stat_bar_tile_etho}},

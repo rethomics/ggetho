@@ -1,4 +1,4 @@
-#' Display a variable of interest either as colour intensity value or a bar height
+#' Display a variable of interest either as a colour intensity value or as a bar height
 #'
 #' These functions show the temporal trend (time on the x axis) of a variable of interest (z axis)
 #' as either colour intensity (`stat_tile_etho`) or using the hight of the tiles (`stat_bar_tile_etho`).
@@ -7,8 +7,8 @@
 #' @family layers
 #' @inheritParams ggplot2::stat_summary_2d
 #' @inheritParams stat_pop_etho
-#' @param method function used to compute the aggregate, when grouping individuals on the same row.
-#' The default is [mean]. [median], [min], [max] are examples of other functions that can be used.
+#' @param method function used to compute the aggregate, when/if grouping several individuals on the same row.
+#' The default is fucntion is [mean]. [median], [min], [max] are examples of alternatives.
 #' @examples
 #' # We start by making a to dataset with 20 animals
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),
