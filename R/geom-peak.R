@@ -39,9 +39,9 @@
 #' pl + geom_peak(colour = "red", size = 10, alpha = .5, shape = 20)
 #'
 #' ## In the context of circadian analysis,
-#' # Using the zeitgebr library:
-#' \dontrun{
-#' library(zeitgebr)
+#' # Using the zeitgebr package:
+#' \donttest{
+#' require(zeitgebr)
 #' # We make toy data
 #' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:40),
 #'                        region_id = 1:40,
@@ -61,8 +61,7 @@
 #' }
 #' @seealso
 #' * [ggperio] to create a periodogram
-# TODO add to doc iff zeitgebr in CRAN
-# * [zeitgebr::find_peaks] to automatically add a `peak` column on periodogram data
+#' * [zeitgebr::find_peaks] to automatically add a `peak` column on periodogram data
 #' @references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#periodograms)
 #' @export

@@ -18,8 +18,8 @@ This function summarises periodogram data (containing periodogram of multiple in
 to show period on the \code{x} axis, and power (or equivalent) on the \code{y} axis.
 }
 \examples{
-\dontrun{
-library(zeitgebr)
+\donttest{
+requiere(zeitgebr)
 # We make toy data
 metadata <- data.table(id = sprintf("toy_experiment|\%02d", 1:40),
                        region_id = 1:40,

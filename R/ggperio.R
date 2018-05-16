@@ -6,8 +6,8 @@
 #' @inheritParams ggetho
 #'
 #' @examples
-#' \dontrun{
-#' library(zeitgebr)
+#' \donttest{
+#' requiere(zeitgebr)
 #' # We make toy data
 #' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:40),
 #'                        region_id = 1:40,
@@ -32,8 +32,7 @@
 #' @seealso
 #' * [ggetho] to plot time series
 #' * [geom_peak] to draw peaks on a periodogram
-# TODO add to doc iff zeitgebr in CRAN
-# * [zeitgebr::periodogram] to compute periodograms in a first place
+#' * [zeitgebr::periodogram] to compute periodograms in a first place
 #' @references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#periodograms)
 #' @export
