@@ -8,7 +8,7 @@ id_labeller(labels)
 }
 \arguments{
 \item{labels}{Data frame of labels. Usually contains only one
-element, but facetting over multiple factors entails multiple
+element, but faceting over multiple factors entails multiple
 label variables.}
 }
 \description{
