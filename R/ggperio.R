@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \donttest{
-#' requiere(zeitgebr)
+#' require(zeitgebr)
 #' # We make toy data
 #' metadata <- data.table(id = sprintf("toy_experiment|%02d", 1:40),
 #'                        region_id = 1:40,
@@ -39,7 +39,8 @@
 ggperio <- function(data,
                     mapping = aes(x = period, y = power),
                    ...){
-  mapping_list <-as.list(as.character(mapping))
+  mapping_list <- make_labels(mapping)
+  #mapping_list <-as.list(as.character(mapping))
   aes_names <- names(mapping_list)
   if(!"x" %in% aes_names)
     mapping_list$x = "period"
@@ -47,6 +48,7 @@ ggperio <- function(data,
     mapping_list$y = "power"
   if(!"peak" %in% aes_names & "peak" %in% colnames(data))
     mapping_list$peak = "peak"
+
   has_colour = "colour" %in% aes_names
   has_fill = "fill" %in% aes_names
 

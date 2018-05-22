@@ -96,8 +96,10 @@ ggetho <- function(data,
     stop("multiplot must be an integer >1, typically 2, for double plotting")
   }
 
-  mapping_list <- as.list(as.character(mapping))
+  #mapping_list <- as.list(as.character(mapping))
+  mapping_list <- make_labels(mapping)
   aes_names <- names(mapping_list)
+
 
   has_colour = "colour" %in% aes_names
   has_fill = "fill" %in% aes_names
@@ -118,7 +120,6 @@ ggetho <- function(data,
     var_of_interest = mapping_list$z
     discrete_y <- TRUE
   }
-
   else if("y" %in% aes_names)
     var_of_interest = mapping_list$y
   else
