@@ -19,7 +19,7 @@ to show period on the \code{x} axis, and power (or equivalent) on the \code{y} a
 }
 \examples{
 \donttest{
-requiere(zeitgebr)
+require(zeitgebr)
 # We make toy data
 metadata <- data.table(id = sprintf("toy_experiment|\%02d", 1:40),
                        region_id = 1:40,
