@@ -3,6 +3,12 @@
 #' A set of scales used to represent experimental durations.
 #' @param time_wrap duration (in seconds) used to wrap the labels of the time axis
 #' @param unit the name of unit (string) to be used in the label (e.g. one could use `"second"` instead of `"s"`)
+#' @param expand Vector of range expansion constants used to add some
+#' padding around the data, to ensure that they are placed some distance
+#' away from the axes. Use the convenience function `ggplot2::expand_scale()`
+#' to generate the values for the `expand` argument. The defaults are to
+#' expand the scale by 5\% on each side for continuous variables, and by
+#' 0.6 units on each side for discrete variables.
 #' @details `time_wrap` is useful, for instance, to express time within a day (ZT), instead of absolute time.
 #' @inheritParams ggplot2::scale_x_time
 #' @examples

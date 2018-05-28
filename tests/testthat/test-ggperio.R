@@ -21,7 +21,7 @@ test_that("ggperio works", {
   testthat::expect_is(out$layers[[1]], "ggproto")
 
 
-    per_dt[, peak:= NULL]
+  per_dt[, peak:= NULL]
   out <- ggperio(per_dt, aes(y=power, colour=condition))
   out <- out +  stat_pop_etho()
   print(out)
@@ -32,3 +32,7 @@ test_that("ggperio works", {
   print(out)
   testthat::expect_is(out$layers[[1]], "ggproto")
 })
+
+
+
+

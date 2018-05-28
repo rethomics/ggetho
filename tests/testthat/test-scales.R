@@ -15,27 +15,31 @@ test_that("scales work", {
 
   #(three_day/10) / behavr::hours(1)
 
-  as.numeric(htr$breaks(one_h)) / 3600
-  htr$breaks(one_h/3)
-  htr$breaks(three_h)
-  htr$breaks(twelve_h)
-  htr$breaks(one_day)
-  htr$breaks(three_day)
-  htr$breaks(three_day/10)
-  htr$breaks(three_day/13)
-  htr$breaks(five_day/13)
+  expect_identical(as.numeric(htr$breaks(one_h)) / 3600 , c(-1,-.5,0,.5,1))
+  #as.numeric(htr$breaks(one_h/3)   /
+  expect_identical(as.numeric(htr$breaks(three_h)) / 3600, c(-3,-1.5,0,1.5,3))
+  expect_identical(as.numeric(htr$breaks(twelve_h)) / 3600, c(-12,-6,0,6,12))
+  expect_identical(as.numeric(htr$breaks(one_day)) / 3600, c(-12,-6,0,6,12) * 2)
+  expect_identical(as.numeric(htr$breaks(three_day)) / 3600, c(-72,-48,-24,0,24,48,72))
+
+
+T
+  expect_identical(as.numeric(htr$breaks(three_day/10)) / 3600, c(-3,-1.5,0,1.5,3) * 2)
+  expect_identical(as.numeric(htr$breaks(three_day/13)) / 3600, c(-3,-1.5,0,1.5,3) * 2)
+  expect_identical(as.numeric(htr$breaks(five_day/13)) / 3600, c(-9,-6,-3,0,3,6,9) )
+
 
   dtr <- ggetho:::days_trans()
-  dtr$breaks(one_h)
-  dtr$breaks(one_h/3)
-  dtr$breaks(three_h)
-  dtr$breaks(twelve_h)
-  dtr$breaks(one_day)
-  dtr$breaks(three_day)
-  dtr$breaks(three_day/10)
-  dtr$breaks(three_day/13)
-  dtr$breaks(five_day * 1.7)
-  dtr$breaks(five_day * 6)
+  as.numeric(dtr$breaks(one_h)) / 3600 / 24
+  as.numeric(dtr$breaks(one_h/3))/ 3600 / 24
+  as.numeric(dtr$breaks(three_h))/ 3600 / 24
+  as.numeric(dtr$breaks(twelve_h))/ 3600 / 24
+  as.numeric(dtr$breaks(one_day))/ 3600 / 24
+  as.numeric(dtr$breaks(three_day))/ 3600 / 24
+  as.numeric(dtr$breaks(three_day/10))/ 3600 / 24
+  as.numeric(dtr$breaks(three_day/13))/ 3600 / 24
+  as.numeric(dtr$breaks(five_day * 1.7))/ 3600 / 24
+  as.numeric(dtr$breaks(five_day * 6))/ 3600 / 24
 
 })
 
