@@ -60,6 +60,7 @@ stat_pop_etho <- function(mapping = NULL, data = NULL,
     params = list(
       method = method,
       method.args = method.args,
+      se=TRUE,
       ...
     )
   )
@@ -67,7 +68,7 @@ stat_pop_etho <- function(mapping = NULL, data = NULL,
 
 
 StatPopEtho <- ggplot2::ggproto("StatPopEtho", ggplot2::Stat,
-                       compute_group = function(data, scales,method, method.args = list()) {
+                       compute_group = function(data, scales, method, method.args = list()) {
                          data <- data.table::as.data.table(data)
                          foo <- function(y){
                            all_args <- append(list(y), method.args)
@@ -80,6 +81,5 @@ StatPopEtho <- ggplot2::ggproto("StatPopEtho", ggplot2::Stat,
                        },
                        required_aes = c("x", "y")
 )
-
 
 
