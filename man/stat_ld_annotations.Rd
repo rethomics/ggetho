@@ -4,11 +4,11 @@
 \alias{stat_ld_annotations}
 \title{Compute and display light/dark annotations onto a plot object}
 \usage{
-stat_ld_annotations(mapping = NULL, data = NULL, position = "identity",
-  ld_colours = c("white", "black"), ypos = "bottom", height = 0.03,
-  period = hours(24), phase = 0, l_duration = hours(12),
-  outline = "black", x_limits = c(NA, NA), ..., na.rm = FALSE,
-  show.legend = FALSE, inherit.aes = TRUE)
+stat_ld_annotations(mapping = NULL, data = NULL,
+  position = "identity", ld_colours = c("white", "black"),
+  ypos = "bottom", height = 0.03, period = hours(24), phase = 0,
+  l_duration = hours(12), outline = "black", x_limits = c(NA, NA),
+  ..., na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -108,3 +108,4 @@ Other layers: \code{\link{geom_peak}},
   \code{\link{stat_bar_tile_etho}},
   \code{\link{stat_pop_etho}}
 }
+\concept{layers}

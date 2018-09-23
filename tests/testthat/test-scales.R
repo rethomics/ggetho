@@ -44,8 +44,6 @@ T
 })
 
 
-context("scales")
-
 test_that("scales work", {
 
   df <- data.frame(y=rnorm(1000), t=1:1000 * 10)
@@ -57,5 +55,21 @@ test_that("scales work", {
   ggplot(df, aes(y,t)) + scale_y_hours()
   ggplot(df, aes(y,t)) + scale_y_seconds()
 
+})
+
+
+test_that("scales handles log transform", {
+
+  df <- data.frame(t= 1:1000, y=seq(from=1,to=days(.1), length.out=1000))
+  pl <- ggplot(df, aes(t, y))
+  pl + geom_point()
+  testthat::expect_silent(pl+ scale_y_days(log=T) +geom_point())
+  testthat::expect_silent(pl+ scale_x_days(log=T) +geom_point())
+
+  testthat::expect_silent(pl+ scale_y_hours(log=T) +geom_point())
+  testthat::expect_silent(pl+ scale_x_hours(log=T) +geom_point())
+
+  testthat::expect_silent(pl+ scale_y_seconds(log=T) +geom_point())
+  testthat::expect_silent(pl+ scale_x_seconds(log=T) +geom_point())
 })
 

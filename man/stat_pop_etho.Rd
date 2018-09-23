@@ -103,3 +103,4 @@ Other layers: \code{\link{geom_peak}},
   \code{\link{stat_bar_tile_etho}},
   \code{\link{stat_ld_annotations}}
 }
+\concept{layers}

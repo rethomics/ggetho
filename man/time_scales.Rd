@@ -11,35 +11,35 @@
 \alias{scale_y_seconds}
 \title{Scales for durations}
 \usage{
-scale_x_days(name = "Time", breaks = waiver(), minor_breaks = waiver(),
-  labels = waiver(), limits = NULL, expand = waiver(),
-  oob = scales::censor, na.value = NA_real_, position = "bottom",
-  time_wrap = NULL, unit = "day")
+scale_x_days(name = "Time", breaks = waiver(),
+  minor_breaks = waiver(), labels = waiver(), limits = NULL,
+  expand = waiver(), oob = scales::censor, na.value = NA_real_,
+  position = "bottom", time_wrap = NULL, unit = "day", log = FALSE)
 
-scale_y_days(name = "Time", breaks = waiver(), minor_breaks = waiver(),
-  labels = waiver(), limits = NULL, expand = waiver(),
-  oob = scales::censor, na.value = NA_real_, position = "left",
-  time_wrap = NULL, unit = "day")
+scale_y_days(name = "Time", breaks = waiver(),
+  minor_breaks = waiver(), labels = waiver(), limits = NULL,
+  expand = waiver(), oob = scales::censor, na.value = NA_real_,
+  position = "left", time_wrap = NULL, unit = "day", log = FALSE)
 
-scale_x_hours(name = "Time", breaks = waiver(), minor_breaks = waiver(),
-  labels = waiver(), limits = NULL, expand = waiver(),
-  oob = scales::censor, na.value = NA_real_, position = "bottom",
-  time_wrap = NULL, unit = "h")
+scale_x_hours(name = "Time", breaks = waiver(),
+  minor_breaks = waiver(), labels = waiver(), limits = NULL,
+  expand = waiver(), oob = scales::censor, na.value = NA_real_,
+  position = "bottom", time_wrap = NULL, unit = "h", log = FALSE)
 
-scale_y_hours(name = "Time", breaks = waiver(), minor_breaks = waiver(),
-  labels = waiver(), limits = NULL, expand = waiver(),
-  oob = scales::censor, na.value = NA_real_, position = "left",
-  time_wrap = NULL, unit = "h")
+scale_y_hours(name = "Time", breaks = waiver(),
+  minor_breaks = waiver(), labels = waiver(), limits = NULL,
+  expand = waiver(), oob = scales::censor, na.value = NA_real_,
+  position = "left", time_wrap = NULL, unit = "h", log = FALSE)
 
-scale_x_seconds(name = "Time", breaks = waiver(), minor_breaks = waiver(),
-  labels = waiver(), limits = NULL, expand = waiver(),
-  oob = scales::censor, na.value = NA_real_, position = "bottom",
-  time_wrap = NULL, unit = "s")
+scale_x_seconds(name = "Time", breaks = waiver(),
+  minor_breaks = waiver(), labels = waiver(), limits = NULL,
+  expand = waiver(), oob = scales::censor, na.value = NA_real_,
+  position = "bottom", time_wrap = NULL, unit = "s", log = FALSE)
 
-scale_y_seconds(name = "Time", breaks = waiver(), minor_breaks = waiver(),
-  labels = waiver(), limits = NULL, expand = waiver(),
-  oob = scales::censor, na.value = NA_real_, position = "left",
-  time_wrap = NULL, unit = "s")
+scale_y_seconds(name = "Time", breaks = waiver(),
+  minor_breaks = waiver(), labels = waiver(), limits = NULL,
+  expand = waiver(), oob = scales::censor, na.value = NA_real_,
+  position = "left", time_wrap = NULL, unit = "s", log = FALSE)
 }
 \arguments{
 \item{name}{The name of the scale. Used as axis or legend title. If
@@ -95,6 +95,8 @@ scales, "top" or "bottom" for horizontal scales}
 \item{time_wrap}{duration (in seconds) used to wrap the labels of the time axis}
 
 \item{unit}{the name of unit (string) to be used in the label (e.g. one could use \code{"second"} instead of \code{"s"})}
+
+\item{log}{logical, whether axis should be on a log-transformed}
 }
 \description{
 A set of scales used to represent experimental durations.

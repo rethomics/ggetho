@@ -3,6 +3,7 @@
 export(geom_peak)
 export(ggetho)
 export(ggperio)
+export(ggspectro)
 export(id_labeller)
 export(scale_x_days)
 export(scale_x_hours)

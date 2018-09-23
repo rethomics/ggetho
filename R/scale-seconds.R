@@ -10,7 +10,8 @@ scale_x_seconds <- function(name = "Time",
                           na.value = NA_real_,
                           position = "bottom",
                           time_wrap = NULL,
-                          unit = "s") {
+                          unit = "s",
+                          log = FALSE) {
   name <- sprintf("%s (%s)", name, unit)
   scale_x_continuous(
     name = name,
@@ -22,7 +23,7 @@ scale_x_seconds <- function(name = "Time",
     oob = oob,
     na.value = na.value,
     position = position,
-    trans = seconds_trans(time_wrap)
+    trans = seconds_trans(time_wrap, log_tr = log)
   )
 }
 
@@ -39,7 +40,8 @@ scale_y_seconds <- function(name = "Time",
                             na.value = NA_real_,
                             position = "left",
                             time_wrap = NULL,
-                            unit="s") {
+                            unit="s",
+                            log = FALSE) {
   name <- sprintf("%s (%s)", name, unit)
   scale_y_continuous(
     name = name,
@@ -51,21 +53,23 @@ scale_y_seconds <- function(name = "Time",
     oob = oob,
     na.value = na.value,
     position = position,
-    trans = seconds_trans(time_wrap)
+    trans = seconds_trans(time_wrap, log_tr = log)
   )
 }
 
 
-seconds_trans <- function(time_wrap = NULL) {
+seconds_trans <- function(time_wrap = NULL, log_tr = FALSE) {
   if(is.null(time_wrap))
     formater <- function(x)format(as.numeric(x))
   else
     formater <- function(x)format((as.numeric(x) %% time_wrap))
+  foo <- ifelse(log_tr,log10, identity)
+  foo_inv <- ifelse(log_tr,function(x){10^x}, identity)
 
   scales::trans_new(
     "seconds",
-    transform = function(x){structure(as.numeric(x), names = names(x))},
-    inverse = function(x){as.numeric(x) },
+    transform = function(x){structure(foo(as.numeric(x)), names = names(x))},
+    inverse = function(x){foo_inv(as.numeric(x)) },
     format = formater
   )
 }

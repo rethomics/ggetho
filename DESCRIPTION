@@ -1,14 +1,14 @@
 Package: ggetho
 Title: Visualisation of High-Throughput Behavioural (i.e. Ethomics) Data
 Date: 2018-05-22
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: c(
     person("Quentin", "Geissmann", role = c("aut", "cre"), email = "qgeissmann@gmail.com")
     )
 Description: Extension of 'ggplot2' providing layers, scales and preprocessing functions
     useful to represent behavioural variables that are recorded over multiple animals and days.
     This package is part of the rethomics framework <http://rethomics.github.io/>.
-Depends:  
+Depends: 
     R (>= 3.00),
     ggplot2,
     behavr
@@ -28,5 +28,5 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/rethomics/ggetho
 BugReports: https://github.com/rethomics/ggetho/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)

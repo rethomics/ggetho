@@ -10,7 +10,8 @@ scale_x_days <- function(name = "Time",
                          na.value = NA_real_,
                          position = "bottom",
                          time_wrap = NULL,
-                         unit = "day") {
+                         unit = "day",
+                         log = FALSE) {
 
   name <- sprintf("%s (%s)", name, unit)
   scale_x_continuous(
@@ -23,7 +24,7 @@ scale_x_days <- function(name = "Time",
     oob = oob,
     na.value = na.value,
     position = position,
-    trans = days_trans(time_wrap)
+    trans = days_trans(time_wrap, log_tr = log)
   )
 }
 
@@ -40,8 +41,8 @@ scale_y_days <- function(name = "Time",
                          na.value = NA_real_,
                          position = "left",
                          time_wrap = NULL,
-                         unit="day") {
-
+                         unit="day",
+                         log = FALSE) {
   name <- sprintf("%s (%s)", name, unit)
   scale_y_continuous(
     name = name,
@@ -53,7 +54,7 @@ scale_y_days <- function(name = "Time",
     oob = oob,
     na.value = na.value,
     position = position,
-    trans = days_trans(time_wrap)
+    trans = days_trans(time_wrap, log_tr = log)
   )
 }
 
@@ -64,16 +65,17 @@ scale_y_days <- function(name = "Time",
 #' t$inverse(t$transform(hms))
 #' t$breaks(hms)
 #' @noRd
-days_trans <- function(time_wrap = NULL) {
+days_trans <- function(time_wrap = NULL,log_tr=FALSE) {
   if(is.null(time_wrap))
     formater <- function(x)format(as.numeric(x) / 86400)
   else
     formater <- function(x)format((as.numeric(x) %% time_wrap) / 86400)
-
+  foo <- ifelse(log_tr,log10, identity)
+  foo_inv <- ifelse(log_tr,function(x){10^x}, identity)
   scales::trans_new(
     "days",
-    transform = function(x){ structure(as.numeric(x), names = names(x))},
-    inverse = function(x){x},
+    transform = function(x){ structure(foo(as.numeric(x)), names = names(x))},
+    inverse = function(x){foo_inv(x)},
     breaks = days_breaks(),
     format = formater
   )

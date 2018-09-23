@@ -128,3 +128,4 @@ Other layers: \code{\link{stat_bar_tile_etho}},
   \code{\link{stat_ld_annotations}},
   \code{\link{stat_pop_etho}}
 }
+\concept{layers}

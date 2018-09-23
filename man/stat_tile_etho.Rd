@@ -112,3 +112,4 @@ Other layers: \code{\link{geom_peak}},
   \code{\link{stat_ld_annotations}},
   \code{\link{stat_pop_etho}}
 }
+\concept{layers}
