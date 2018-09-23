@@ -1,6 +1,6 @@
 #' Prepare a ggplot object to represent periodogram data
 #'
-#' This function summarises periodogram data (containing periodogram of multiple individual),
+#' This function summarises periodogram data (containing periodograms of multiple individual),
 #' to show period on the `x` axis, and power (or equivalent) on the `y` axis.
 #'
 #' @inheritParams ggetho

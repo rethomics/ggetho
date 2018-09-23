@@ -27,3 +27,15 @@ ggspectro(data, mapping = aes(), summary_FUN = mean,
 This function summarises spectrogram data (containing spectrograms of multiple individual),
 to show period on the \code{y} axis, time on the \code{x} axis and power on the \code{z} axis (\emph{e.g.} as a colour).
 }
+\examples{
+\donttest{
+library(zeitgebr)
+data(dams_sample)
+dt <- dams_sample
+spect_dt <- spectrogram(activity, dt)
+pl <- ggspectro(spect_dt,time_wrap = hours(24)) + stat_tile_etho() + scale_y_hours(log=T) +
+  stat_ld_annotations(ld_colours = c("grey","black"))
+pl + facet_grid(period_group ~ .)
+pl + facet_wrap(~ id)
+}
+}
