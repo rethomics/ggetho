@@ -16,6 +16,10 @@
 #' pl + facet_grid(period_group ~ .)
 #' pl + facet_wrap(~ id)
 #'}
+#'@seealso
+#' * [ggperio] to visualise periodograms
+#'@references
+#' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#spectrogram)
 #' @export
 ggspectro <- function(data,
                    mapping = aes(),

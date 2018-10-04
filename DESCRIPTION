@@ -1,7 +1,7 @@
 Package: ggetho
 Title: Visualisation of High-Throughput Behavioural (i.e. Ethomics) Data
-Date: 2018-05-22
-Version: 0.3.3
+Date: 2018-10-04
+Version: 0.3.4
 Authors@R: c(
     person("Quentin", "Geissmann", role = c("aut", "cre"), email = "qgeissmann@gmail.com")
     )
