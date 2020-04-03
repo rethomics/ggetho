@@ -16,6 +16,7 @@
 #' @param x_limits numerical vector of length 2 for the start and end of the annotations (in seconds).
 #' The default, `c(NA, NA)`, uses the full range of the plotted data.
 #' @param period,phase,l_duration period, phase and duration of the L phase (in seconds) of the LD cycle.
+#' @return A ggplot layer.
 #' @examples
 #' library(behavr)
 #' # We start by making a to dataset with 20 animals

@@ -10,6 +10,7 @@
 #' It should return (`y`, `ymin` and `ymax`).
 #' The default is [ggplot2::mean_se], which computes the mean + or - standard error.
 #' [ggplot2::mean_cl_boot] can be used instead to generate bootstrap confidence interval instead.
+#' @return A ggplot layer.
 #' @examples
 #' library(behavr)
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),

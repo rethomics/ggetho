@@ -13,7 +13,7 @@
 #' corresponding to peak ranks (and `0` when the point is not a peak).
 #' In other word, the mapping must provide `x`, `y` and `peak`.
 #' Only peaks matching `peak_rank` will be drawn (see example).
-#'
+#' @return A ggplot layer.
 #' @examples
 #' # We make a data frame by hand with five rows
 #' # There are two peaks: in position 4 and 2

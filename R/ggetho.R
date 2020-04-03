@@ -27,7 +27,7 @@
 #' It is possible to set duration of the period, which is typically 24 h to arbitrary values using the
 #' `multiplot_period` argument.
 #'
-#' @return An initial plot object that can be further edited.
+#' @return An initial ggplot object that can be further edited.
 #'
 #' @examples
 #' # We start by making a dataset with 20 animals

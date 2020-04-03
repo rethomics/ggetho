@@ -20,6 +20,7 @@
 #'}
 #'@seealso
 #' * [ggperio] to visualise periodograms
+#' @return An initial ggplot object that can be further edited.
 #'@references
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#spectrogram)
 #' @export

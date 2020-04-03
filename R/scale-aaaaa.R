@@ -12,6 +12,7 @@
 #' 0.6 units on each side for discrete variables.
 #' @details `time_wrap` is useful, for instance, to express time within a day (ZT), instead of absolute time.
 #' @inheritParams ggplot2::scale_x_time
+#' @return A ggplot scale.
 #' @examples
 #' # We generate some data
 #' metadata <- data.frame(id = sprintf("toy_experiment | %02d", 1:20),

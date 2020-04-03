@@ -41,6 +41,7 @@
 #' * [stat_pop_etho] to show population trend by aggregating individuals over time
 #' * [stat_ld_annotations] to show light and dark phases on the plot
 #' @references
+#' @return A ggplot layer.
 #' * The relevant [rethomic tutorial section](https://rethomics.github.io/ggetho.html#tile-plots)
 #' @export
 stat_tile_etho <- function(mapping = NULL, data = NULL,
