@@ -7,7 +7,7 @@ Authors@R: c(
     )
 Description: Extension of 'ggplot2' providing layers, scales and preprocessing functions
     useful to represent behavioural variables that are recorded over multiple animals and days.
-    This package is part of the 'rethomics' framework <http://rethomics.github.io/>.
+    This package is part of the 'rethomics' framework <https://rethomics.github.io/>.
 Depends: 
     R (>= 3.00),
     ggplot2,
